@@ -18,23 +18,17 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
-
-/* ── TOPBAR ── */
 .topbar{background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 40px;height:104px;position:sticky;top:0;z-index:50;box-shadow:0 2px 8px rgba(0,0,0,.05)}
 .logo-img{height:96px;width:auto;display:block}
 .logo-fallback{display:none;align-items:center;gap:10px}
 .logo-fallback span{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--ink)}
 .logo-fallback small{font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--mint);display:block;margin-top:-2px}
-
-/* ── FLOATING REPORTS BTN ── */
 .fab{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:49;display:flex;flex-direction:column;align-items:center;gap:0}
 .fab-btn{background:var(--black);color:var(--white);border:none;cursor:pointer;border-radius:12px;padding:16px 11px;display:flex;flex-direction:column;align-items:center;gap:10px;box-shadow:var(--sh-lg);transition:all .2s}
 .fab-btn:hover{background:#1a1a2e;transform:scale(1.05)}
 .fab-icon{font-size:20px}
 .fab-lbl{font-family:'DM Sans',sans-serif;font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.65);writing-mode:vertical-rl}
 .fab-badge{background:var(--mint);color:var(--black);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:800;border-radius:100px;padding:3px 8px;margin-top:6px;min-width:26px;text-align:center;box-shadow:0 2px 8px rgba(0,196,122,.4)}
-
-/* ── PASSWORD MODAL ── */
 .modal-bg{position:fixed;inset:0;background:rgba(10,10,20,.7);backdrop-filter:blur(5px);z-index:200;display:none;align-items:center;justify-content:center}
 .modal-bg.open{display:flex}
 .modal{background:var(--white);border-radius:16px;padding:44px 40px;width:100%;max-width:400px;box-shadow:0 24px 80px rgba(0,0,0,.25);animation:popIn .22s cubic-bezier(.34,1.56,.64,1) both;position:relative}
@@ -50,8 +44,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .modal-err{color:var(--red);font-size:12px;font-weight:600;margin-top:8px;display:none}
 .btn-modal{width:100%;margin-top:4px;background:var(--mint);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;padding:15px;border:none;border-radius:var(--r);cursor:pointer;transition:all .18s;box-shadow:0 4px 16px rgba(0,196,122,.3)}
 .btn-modal:hover{background:#009F63}
-
-/* ── HERO ── */
 .hero{background:var(--black);padding:60px 40px 56px;position:relative;overflow:hidden}
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 65% 50%,rgba(0,196,122,.12) 0%,transparent 70%);pointer-events:none}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(0,196,122,.1);border:1px solid rgba(0,196,122,.28);border-radius:100px;padding:5px 14px;margin-bottom:20px;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mint)}
@@ -60,8 +52,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5.5vw,72px);letter-spacing:2px;line-height:1;color:var(--white);margin-bottom:14px;position:relative}
 .hero h1 span{color:var(--mint)}
 .hero p{color:rgba(255,255,255,.58);font-size:15px;font-weight:300;max-width:560px;line-height:1.7;position:relative}
-
-/* ── SURVEY WRAP ── */
 .sw{max-width:760px;margin:0 auto;padding:44px 24px 100px}
 .prog-outer{display:flex;align-items:center;gap:14px;margin-bottom:40px}
 .prog-track{flex:1;height:6px;background:var(--border);border-radius:100px;overflow:hidden}
@@ -69,8 +59,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .prog-pct{font-size:12px;font-weight:700;color:var(--mint);min-width:36px;text-align:right}
 .sec-hd{display:flex;align-items:center;gap:14px;font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--mint);margin:44px 0 16px}
 .sec-hd::after{content:'';flex:1;height:1px;background:var(--border)}
-
-/* fields */
 .fg{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:26px;margin-bottom:8px;display:grid;grid-template-columns:1fr 1fr;gap:16px;box-shadow:var(--sh)}
 .fld{display:flex;flex-direction:column;gap:7px}
 .fld label{font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
@@ -79,8 +67,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .fld input::placeholder{color:#C0C0CC}
 .fld input:focus,.fld select:focus{border-color:var(--mint);background:var(--white)}
 .fld select option{background:var(--white)}
-
-/* question card */
 .qc{background:var(--white);border:1.5px solid var(--border);border-radius:12px;padding:24px 26px;margin-bottom:10px;box-shadow:var(--sh);border-left:4px solid transparent;transition:border-left-color .18s}
 .qc:focus-within,.qc.answered{border-left-color:var(--mint)}
 .qc.flagged{border-left-color:var(--red)!important;border-color:rgba(229,62,62,.25)!important;background:#FFFAFA}
@@ -89,15 +75,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .qk{background:var(--mint-lt);border:1px solid var(--mint-md);border-radius:4px;padding:2px 8px;font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--mint)}
 .qt{font-size:15px;font-weight:600;color:var(--ink);line-height:1.45;margin-bottom:5px}
 .qh{font-size:12px;color:var(--muted);line-height:1.55;margin-bottom:16px}
-
-/* rating */
 .rrow{display:flex;gap:6px;flex-wrap:wrap}
 .rb{width:44px;height:44px;border-radius:var(--r);border:1.5px solid var(--border);background:var(--bg);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .14s}
 .rb:hover{border-color:var(--mint);color:var(--mint);background:var(--mint-lt)}
 .rb.on{background:var(--mint);border-color:var(--mint);color:var(--white);box-shadow:0 2px 8px rgba(0,196,122,.3)}
 .rl{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--muted);font-weight:600}
-
-/* choices */
 .cl{display:flex;flex-direction:column;gap:7px}
 .cb{display:flex;align-items:center;gap:12px;padding:12px 15px;border:1.5px solid var(--border);border-radius:var(--r);background:var(--bg);cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--body);transition:all .14s}
 .cb:hover{border-color:var(--mint);background:var(--mint-lt);color:var(--ink)}
@@ -105,27 +87,19 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .cdot{width:17px;height:17px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .14s}
 .cb.on .cdot{border-color:var(--mint);background:var(--mint)}
 .cb.on .cdot::after{content:'';width:5px;height:5px;background:var(--white);border-radius:50%}
-
-/* pills */
 .pr{display:flex;flex-wrap:wrap;gap:7px}
 .pb{padding:9px 18px;border-radius:100px;border:1.5px solid var(--border);background:var(--bg);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--body);cursor:pointer;transition:all .14s}
 .pb:hover{border-color:var(--mint);background:var(--mint-lt)}
 .pb.on{border-color:var(--mint);background:var(--mint);color:var(--white);font-weight:700}
-
-/* textarea */
 .qtxt{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);padding:13px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);resize:vertical;min-height:120px;outline:none;transition:border-color .18s,background .18s;line-height:1.65}
 .qtxt:focus{border-color:var(--mint);background:var(--white)}
 .qtxt::placeholder{color:#C0C0CC}
-
-/* submit */
 .sa{text-align:center;padding-top:28px}
 .btn-sub{background:var(--mint);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;padding:17px 68px;border:none;border-radius:var(--r);cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(0,196,122,.35)}
 .btn-sub:hover:not(:disabled){background:#009F63;transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,196,122,.45)}
 .btn-sub:disabled{background:#C8E6D8;color:#7AB89A;box-shadow:none;cursor:not-allowed;transform:none}
 .sub-note{margin-top:12px;font-size:11px;color:var(--muted)}
 .err-msg{color:var(--red);font-size:13px;font-weight:600;margin-top:14px;display:none;padding:11px 16px;background:#FFF5F5;border:1px solid rgba(229,62,62,.2);border-radius:var(--r)}
-
-/* success */
 .suc-wrap{display:none;max-width:540px;margin:60px auto;padding:0 24px}
 .suc-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:56px 44px;text-align:center;box-shadow:var(--sh)}
 .suc-icon{font-size:54px;margin-bottom:18px}
@@ -134,10 +108,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .suc-note{margin-top:18px;padding:13px 16px;background:var(--mint-lt);border:1px solid var(--mint-md);border-radius:var(--r);font-size:13px;color:var(--body)}
 .btn-ghost{display:inline-block;margin-top:22px;background:none;border:2px solid var(--mint);color:var(--mint);font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;padding:12px 32px;border-radius:var(--r);cursor:pointer;transition:all .18s}
 .btn-ghost:hover{background:var(--mint);color:var(--white)}
-
-/* ════════════════════════════
-   REPORTS PANEL
-════════════════════════════ */
 #rp{display:none;position:fixed;inset:0;background:var(--bg);z-index:80;overflow-y:auto}
 #rp.open{display:block}
 .rp-bar{background:var(--white);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:64px;position:sticky;top:0;z-index:90;box-shadow:0 2px 8px rgba(0,0,0,.05);flex-wrap:wrap;gap:8px}
@@ -145,39 +115,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .rp-acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .btn-s{background:var(--white);border:1.5px solid var(--border);color:var(--body);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;padding:8px 16px;border-radius:var(--r);cursor:pointer;transition:all .18s;text-decoration:none;display:inline-flex;align-items:center;gap:5px}
 .btn-s:hover{border-color:var(--mint);color:var(--mint);background:var(--mint-lt)}
-.btn-sheet{background:#1A7A3C;color:var(--white);border-color:#1A7A3C}
-.btn-sheet:hover{background:#156630;border-color:#156630;color:var(--white)}
 .btn-close-rp{background:var(--black);color:var(--white);border-color:var(--black)}
 .btn-close-rp:hover{background:#333;border-color:#333;color:var(--white)}
-
-/* Hide export for client role */
 .role-client .export-only{display:none!important}
-
 .rp-hero{background:var(--black);padding:44px 40px 40px;position:relative;overflow:hidden}
 .rp-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 65% 50%,rgba(0,196,122,.12) 0%,transparent 70%);pointer-events:none}
 .rp-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,56px);letter-spacing:2px;line-height:1;color:var(--white);margin-bottom:8px;position:relative}
 .rp-hero h1 span{color:var(--mint)}
 .rp-hero p{color:rgba(255,255,255,.55);font-size:14px;font-weight:300;max-width:500px;line-height:1.65;position:relative}
-
 .rw{max-width:1080px;margin:0 auto;padding:36px 24px 80px}
 .rtop{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px}
 .rtop h2{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:2px;line-height:1;color:var(--ink)}
 .rtop h2 span{color:var(--mint)}
 .rtop-sub{font-size:12px;color:var(--muted);margin-top:3px}
-
 .kg{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:11px;margin-bottom:28px}
 .kc{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;box-shadow:var(--sh)}
 .kn{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--mint);line-height:1;margin-bottom:4px}
 .kl{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
-
-/* loading skeleton */
-.loading-cards{display:flex;flex-direction:column;gap:14px}
-.skel{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px 22px;box-shadow:var(--sh);animation:shimmer 1.5s infinite}
-@keyframes shimmer{0%,100%{opacity:1}50%{opacity:.5}}
-.skel-hd{height:20px;background:var(--border);border-radius:4px;width:40%;margin-bottom:10px}
-.skel-line{height:12px;background:var(--border);border-radius:4px;margin-bottom:8px}
-.skel-line.w60{width:60%}.skel-line.w80{width:80%}.skel-line.w50{width:50%}
-
 .rc{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:var(--sh)}
 .rch{background:var(--black);padding:16px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .rc-name{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:1.5px;color:var(--white)}
@@ -195,20 +149,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .rc-cmt-l{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--mint);margin-bottom:5px;font-style:normal}
 .empty{text-align:center;padding:70px 24px;color:var(--muted)}
 .empty h3{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:1px;color:var(--body);margin-bottom:8px}
-
-/* source pill */
-.source-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 12px;border-radius:100px;margin-bottom:16px}
-.source-pill.live{background:#E6FBF2;color:#006640;border:1px solid var(--mint-md)}
-.source-pill.local{background:#FFF8E1;color:#7A4800;border:1px solid #F6C90E}
-
-/* logged-in badge */
 .login-badge{font-size:11px;font-weight:600;color:var(--muted);display:flex;align-items:center;gap:6px;padding:5px 12px;background:var(--bg);border:1px solid var(--border);border-radius:100px}
 .login-badge span{color:var(--mint);font-weight:800}
-
-/* toast */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--black);color:var(--white);font-size:13px;font-weight:600;padding:12px 22px;border-radius:var(--r);opacity:0;transition:opacity .3s;pointer-events:none;z-index:300;border-left:4px solid var(--mint);white-space:nowrap}
 .toast.show{opacity:1}
-
 @media(max-width:640px){
   .topbar,.rp-bar{padding:0 14px}
   .hero,.rp-hero{padding:36px 16px 40px}
@@ -439,7 +383,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       <div class="qm"><span class="qn">Q14 of 14</span><span class="qk">Open Feedback</span></div>
       <div class="qt">Share a specific example of when we went above and beyond — or any area to improve.</div>
       <div class="qh">Real examples carry huge weight with DHL. The more specific the better — goes directly to our senior leadership team.</div>
-      <textarea class="qtxt" id="q14" placeholder="e.g. 'During the Christmas peak you filled 18 roles overnight on zero notice — that was exceptional. One improvement: send us proactive candidate profiles ahead of known volume uplifts...'" oninput="cp()"></textarea>
+      <textarea class="qtxt" id="q14" placeholder="e.g. 'During the Christmas peak you filled 18 roles overnight on zero notice — that was exceptional...'" oninput="cp()"></textarea>
     </div>
 
     <div class="sa">
@@ -468,13 +412,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       <div class="login-badge" id="login-badge">👤 Logged in as: <span id="login-user-label">—</span></div>
       <button class="btn-s" onclick="loadReports()">↻ Refresh</button>
       <button class="btn-s export-only" onclick="exportCSV()">⬇ Export CSV</button>
-      <a class="btn-s btn-sheet export-only" href="https://docs.google.com/spreadsheets" target="_blank">📊 Google Sheet</a>
       <button class="btn-s btn-close-rp" onclick="closeReports()">✕ Close</button>
     </div>
   </div>
 
   <div class="rp-hero">
-    <div class="eyebrow" style="margin-bottom:14px"><span class="dot"></span>Live Data · Google Sheets</div>
+    <div class="eyebrow" style="margin-bottom:14px"><span class="dot"></span>Depot Survey Results</div>
     <h1>Supplier <span>Evidence Pack</span></h1>
     <p>All depot responses — ready to present directly to DHL as your case for PSL retention.</p>
   </div>
@@ -486,8 +429,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
         <p class="rtop-sub" id="data-note">Loading…</p>
       </div>
     </div>
-
-    <div id="source-pill-wrap"></div>
 
     <div class="kg">
       <div class="kc"><div class="kn" id="k1">—</div><div class="kl">Depots Responded</div></div>
@@ -503,25 +444,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 </div>
 
 <script>
-// ════════════════════════════════════════
-//  CONFIG
-// ════════════════════════════════════════
-const GS_URL = "https://script.google.com/macros/s/AKfycby3FWf2hSr4QL5waU-N1JArXvHdKBWfPE4RBOFu8F9S-mySi9gs0FxvtQ6ec_uloxyh/exec";
 const LS_KEY = "lanesgroup_dhl_v2";
 
-// ── USER ACCOUNTS ──
-// role: "admin" = full access (export CSV, Google Sheet link)
-// role: "client" = view-only (no export buttons)
 const USERS = [
   { username: "Lanes",  password: "Lanes007", role: "admin",  label: "Lanes Group Admin" },
   { username: "DHL",    password: "DHL2025",  role: "client", label: "DHL Client View"   }
 ];
 
 let currentUser = null;
-
 const A = {};
 
-// ── BUILD RATING ROWS ──
 ['rq1','rq2','rq5','rq9','rq13'].forEach(id => {
   const w = document.getElementById(id);
   for (let i = 1; i <= 10; i++) {
@@ -535,120 +467,89 @@ const A = {};
   }
 });
 
-function selC(id, el, val) {
-  document.querySelectorAll('#'+id+' .cb').forEach(b => b.classList.remove('on'));
-  el.classList.add('on'); A[id] = val; answered('qc-'+id); cp();
+function selC(id,el,val){document.querySelectorAll('#'+id+' .cb').forEach(b=>b.classList.remove('on'));el.classList.add('on');A[id]=val;answered('qc-'+id);cp();}
+function selP(id,el,val){document.querySelectorAll('#'+id+' .pb').forEach(b=>b.classList.remove('on'));el.classList.add('on');A[id]=val;answered('qc-'+id);cp();}
+function answered(cid){const el=document.getElementById(cid);if(el){el.classList.add('answered');el.classList.remove('flagged');}}
+function cp(){
+  const info=['f-name','f-role','f-depot','f-region'];
+  const fi=info.filter(i=>document.getElementById(i)?.value?.trim()).length;
+  const ra=['rq1','rq2','rq5','rq9','rq13'].filter(k=>A[k]).length;
+  const ch=['pq3','cq4','cq6','cq7','cq8','cq10','cq11','cq12'].filter(k=>A[k]).length;
+  const tx=document.getElementById('q14')?.value?.trim()?1:0;
+  const pct=Math.round((fi+ra+ch+tx)/(info.length+5+8+1)*100);
+  document.getElementById('prog').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+'%';
 }
-function selP(id, el, val) {
-  document.querySelectorAll('#'+id+' .pb').forEach(b => b.classList.remove('on'));
-  el.classList.add('on'); A[id] = val; answered('qc-'+id); cp();
-}
-function answered(cid) {
-  const el = document.getElementById(cid);
-  if (el) { el.classList.add('answered'); el.classList.remove('flagged'); }
-}
-function cp() {
-  const info = ['f-name','f-role','f-depot','f-region'];
-  const fi = info.filter(i => document.getElementById(i)?.value?.trim()).length;
-  const ra = ['rq1','rq2','rq5','rq9','rq13'].filter(k => A[k]).length;
-  const ch = ['pq3','cq4','cq6','cq7','cq8','cq10','cq11','cq12'].filter(k => A[k]).length;
-  const tx = document.getElementById('q14')?.value?.trim() ? 1 : 0;
-  const pct = Math.round((fi+ra+ch+tx)/(info.length+5+8+1)*100);
-  document.getElementById('prog').style.width = pct+'%';
-  document.getElementById('prog-pct').textContent = pct+'%';
-}
-function showToast(msg, ms=3200) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), ms);
-}
+function showToast(msg,ms=3200){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),ms);}
 
-// ── LOGIN MODAL ──
-function openModal() {
+function openModal(){
   document.getElementById('pw-modal').classList.add('open');
-  document.getElementById('un-inp').value = '';
-  document.getElementById('pw-inp').value = '';
-  document.getElementById('pw-err').style.display = 'none';
-  setTimeout(() => document.getElementById('un-inp').focus(), 120);
+  document.getElementById('un-inp').value='';
+  document.getElementById('pw-inp').value='';
+  document.getElementById('pw-err').style.display='none';
+  setTimeout(()=>document.getElementById('un-inp').focus(),120);
 }
-function closeModal() {
-  document.getElementById('pw-modal').classList.remove('open');
+function closeModal(){document.getElementById('pw-modal').classList.remove('open');}
+function checkPw(){
+  const u=document.getElementById('un-inp').value.trim();
+  const p=document.getElementById('pw-inp').value;
+  const match=USERS.find(x=>x.username===u&&x.password===p);
+  if(match){currentUser=match;closeModal();openReports();}
+  else{document.getElementById('pw-err').style.display='block';document.getElementById('pw-inp').value='';document.getElementById('pw-inp').focus();}
 }
-function checkPw() {
-  const u = document.getElementById('un-inp').value.trim();
-  const p = document.getElementById('pw-inp').value;
-  const match = USERS.find(x => x.username === u && x.password === p);
-  if (match) {
-    currentUser = match;
-    closeModal();
-    openReports();
-  } else {
-    document.getElementById('pw-err').style.display = 'block';
-    document.getElementById('pw-inp').value = '';
-    document.getElementById('pw-inp').focus();
-  }
-}
-document.getElementById('pw-modal').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
+document.getElementById('pw-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
 
-// ── REPORTS PANEL ──
-function openReports() {
-  const rp = document.getElementById('rp');
+function openReports(){
+  const rp=document.getElementById('rp');
   rp.classList.add('open');
-  // Apply role class for showing/hiding export buttons
   rp.classList.remove('role-admin','role-client');
-  if (currentUser) {
-    rp.classList.add('role-' + currentUser.role);
-    document.getElementById('login-user-label').textContent = currentUser.label;
-  }
-  document.body.style.overflow = 'hidden';
+  if(currentUser){rp.classList.add('role-'+currentUser.role);document.getElementById('login-user-label').textContent=currentUser.label;}
+  document.body.style.overflow='hidden';
   loadReports();
 }
-function closeReports() {
+function closeReports(){
   document.getElementById('rp').classList.remove('open');
-  document.body.style.overflow = '';
-  currentUser = null;
-  const url = new URL(window.location.href);
+  document.body.style.overflow='';
+  currentUser=null;
+  const url=new URL(window.location.href);
   url.searchParams.delete('reports');
-  window.history.replaceState({}, '', url);
+  window.history.replaceState({},'',url);
 }
 
-// ── SUBMIT ──
-async function doSubmit() {
-  const name   = document.getElementById('f-name').value.trim();
-  const role   = document.getElementById('f-role').value.trim();
-  const depot  = document.getElementById('f-depot').value.trim();
-  const region = document.getElementById('f-region').value;
-  if (!name||!depot||!region) { alert('Please fill in your name, depot name, and region.'); return; }
-  const req = ['rq1','rq2','pq3','cq4','rq5','cq6','cq7','cq8','rq9','cq10','cq11','cq12','rq13'];
-  const miss = req.filter(k => !A[k]);
-  if (miss.length) {
-    document.querySelectorAll('.qc').forEach(c => c.classList.remove('flagged'));
-    miss.forEach(k => { const el=document.getElementById('qc-'+k); if(el) el.classList.add('flagged'); });
+function doSubmit(){
+  const name=document.getElementById('f-name').value.trim();
+  const role=document.getElementById('f-role').value.trim();
+  const depot=document.getElementById('f-depot').value.trim();
+  const region=document.getElementById('f-region').value;
+  if(!name||!depot||!region){alert('Please fill in your name, depot name, and region.');return;}
+  const req=['rq1','rq2','pq3','cq4','rq5','cq6','cq7','cq8','rq9','cq10','cq11','cq12','rq13'];
+  const miss=req.filter(k=>!A[k]);
+  if(miss.length){
+    document.querySelectorAll('.qc').forEach(c=>c.classList.remove('flagged'));
+    miss.forEach(k=>{const el=document.getElementById('qc-'+k);if(el)el.classList.add('flagged');});
     document.getElementById('err-msg').style.display='block';
     document.getElementById('qc-'+miss[0])?.scrollIntoView({behavior:'smooth',block:'center'});
     return;
   }
   document.getElementById('err-msg').style.display='none';
   const btn=document.getElementById('sub-btn');
-  btn.disabled=true; btn.textContent='Saving…';
+  btn.disabled=true;btn.textContent='Saving…';
   const payload={
     name,role,depot,region,
-    headcount: document.getElementById('f-headcount').value||'',
-    duration:  document.getElementById('f-duration').value||'',
-    overallSatisfaction:A['rq1'], candidateQuality:A['rq2'],
-    fillRate:A['pq3'],            timeToFill:A['cq4'],
-    complianceScore:A['rq5'],     inductionReady:A['cq6'],
-    retention:A['cq7'],           absenceRate:A['cq8'],
-    responsiveness:A['rq9'],      peakSupport:A['cq10'],
-    pslRanking:A['cq11'],         impactIfRemoved:A['cq12'],
+    headcount:document.getElementById('f-headcount').value||'',
+    duration:document.getElementById('f-duration').value||'',
+    overallSatisfaction:A['rq1'],candidateQuality:A['rq2'],
+    fillRate:A['pq3'],timeToFill:A['cq4'],
+    complianceScore:A['rq5'],inductionReady:A['cq6'],
+    retention:A['cq7'],absenceRate:A['cq8'],
+    responsiveness:A['rq9'],peakSupport:A['cq10'],
+    pslRanking:A['cq11'],impactIfRemoved:A['cq12'],
     valueForMoney:A['rq13'],
-    openFeedback: document.getElementById('q14').value.trim(),
-    submittedAt: new Date().toISOString()
+    openFeedback:document.getElementById('q14').value.trim(),
+    submittedAt:new Date().toISOString()
   };
-  saveLocal(payload); updateBadge();
-  try {
-    await fetch(GS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-  } catch(e){ console.warn('Sheet post failed (saved locally):',e); }
+  saveLocal(payload);
+  updateBadge();
   showToast('✅ Response saved!');
   document.getElementById('form-wrap').style.display='none';
   document.getElementById('suc-depot').textContent=depot;
@@ -656,20 +557,11 @@ async function doSubmit() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── LOCAL STORAGE ──
-function saveLocal(p) {
-  let r=[];try{r=JSON.parse(localStorage.getItem(LS_KEY)||'[]');}catch(e){}
-  r.unshift(p); localStorage.setItem(LS_KEY,JSON.stringify(r));
-}
-function getLocal() {
-  try{return JSON.parse(localStorage.getItem(LS_KEY)||'[]');}catch(e){return [];}
-}
-function updateBadge() {
-  document.getElementById('fab-count').textContent = getLocal().length;
-}
+function saveLocal(p){let r=[];try{r=JSON.parse(localStorage.getItem(LS_KEY)||'[]');}catch(e){}r.unshift(p);localStorage.setItem(LS_KEY,JSON.stringify(r));}
+function getLocal(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'[]');}catch(e){return [];}}
+function updateBadge(){document.getElementById('fab-count').textContent=getLocal().length;}
 
-// ── RESET ──
-function doReset() {
+function doReset(){
   ['f-name','f-role','f-depot','f-headcount'].forEach(id=>document.getElementById(id).value='');
   ['f-region','f-duration'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('q14').value='';
@@ -685,111 +577,33 @@ function doReset() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── LOAD REPORTS ──
-function loadReports() {
-  const out = document.getElementById('rep-out');
-  out.innerHTML = `<div class="loading-cards">
-    ${[1,2,3].map(()=>`<div class="skel"><div class="skel-hd"></div><div class="skel-line w80"></div><div class="skel-line w60"></div><div class="skel-line w50"></div></div>`).join('')}
-  </div>`;
-  document.getElementById('data-note').textContent = 'Fetching live data from Google Sheets…';
-
-  const cbName = 'gsCallback_' + Date.now();
-  const script = document.createElement('script');
-  let timedOut = false;
-
-  const timeout = setTimeout(() => {
-    timedOut = true;
-    cleanup();
-    renderReports(getLocal(), false);
-  }, 8000);
-
-  window[cbName] = function(data) {
-    clearTimeout(timeout);
-    if (timedOut) return;
-    cleanup();
-    if (data && data.rows && data.rows.length) {
-      const sheetDepots = new Set(data.rows.map(r => r['Depot']+'|'+r['Submitted At']));
-      const localOnly = getLocal().filter(r => !sheetDepots.has(r.depot+'|'+r.submittedAt));
-      const merged = [...data.rows.map(mapSheetRow), ...localOnly];
-      renderReports(merged, true);
-    } else {
-      renderReports(getLocal(), false);
-    }
-  };
-
-  function cleanup() {
-    if(script.parentNode) script.parentNode.removeChild(script);
-    delete window[cbName];
-  }
-
-  script.onerror = () => {
-    clearTimeout(timeout);
-    cleanup();
-    renderReports(getLocal(), false);
-  };
-
-  script.src = GS_URL + '?callback=' + cbName;
-  document.head.appendChild(script);
+function loadReports(){
+  const docs=getLocal();
+  document.getElementById('data-note').textContent=docs.length
+    ?`${docs.length} response${docs.length!==1?'s':''} · Last refreshed ${new Date().toLocaleTimeString('en-GB')}`
+    :'No responses yet';
+  renderReports(docs);
 }
 
-function mapSheetRow(r) {
-  return {
-    depot:               r['Depot']||'',
-    region:              r['Region']||'',
-    name:                r['Manager Name']||'',
-    role:                r['Job Title']||'',
-    headcount:           r['Weekly Headcount']||'',
-    duration:            r['Duration with Lanes']||'',
-    overallSatisfaction: +r['Q1 Overall Satisfaction']||0,
-    candidateQuality:    +r['Q2 Candidate Quality']||0,
-    fillRate:            r['Q3 Fill Rate %']||'',
-    timeToFill:          r['Q4 Time to Fill']||'',
-    complianceScore:     +r['Q5 Compliance Score']||0,
-    inductionReady:      r['Q6 Induction Readiness']||'',
-    retention:           r['Q7 Retention']||'',
-    absenceRate:         r['Q8 Absence Rate']||'',
-    responsiveness:      +r['Q9 Responsiveness']||0,
-    peakSupport:         r['Q10 Peak Support']||'',
-    pslRanking:          r['Q11 PSL Ranking']||'',
-    impactIfRemoved:     r['Q12 Impact if Removed']||'',
-    valueForMoney:       +r['Q13 Value for Money']||0,
-    openFeedback:        r['Q14 Open Feedback']||'',
-    submittedAt:         r['Submitted At']||''
-  };
-}
-
-function renderReports(docs, fromSheet) {
-  const out = document.getElementById('rep-out');
-  const pillWrap = document.getElementById('source-pill-wrap');
-
-  if (fromSheet) {
-    pillWrap.innerHTML = `<div class="source-pill live">🟢 Live data from Google Sheets — ${docs.length} response${docs.length!==1?'s':''}</div>`;
-    document.getElementById('data-note').textContent = `${docs.length} response${docs.length!==1?'s':''} · Last refreshed ${new Date().toLocaleTimeString('en-GB')}`;
-  } else {
-    pillWrap.innerHTML = docs.length
-      ? `<div class="source-pill local">🟡 Showing locally saved responses — Google Sheets not reachable right now</div>`
-      : '';
-    document.getElementById('data-note').textContent = docs.length ? `${docs.length} local response${docs.length!==1?'s':''}` : 'No responses yet';
-  }
-
-  if (!docs.length) {
-    out.innerHTML=`<div class="empty"><h3>No Responses Yet</h3><p>Share the survey link with your DHL depot managers.<br>Each submission saves here and to Google Sheets automatically.</p></div>`;
+function renderReports(docs){
+  const out=document.getElementById('rep-out');
+  if(!docs.length){
+    out.innerHTML=`<div class="empty"><h3>No Responses Yet</h3><p>Share the survey link with your DHL depot managers.<br>Each submission will appear here automatically.</p></div>`;
+    ['k1','k2','k3','k4','k5','k6'].forEach(id=>document.getElementById(id).textContent='—');
     return;
   }
-
-  const avg = arr => { const v=arr.filter(n=>n>0); return v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(1):'—'; };
-  document.getElementById('k1').textContent = docs.length;
-  document.getElementById('k2').textContent = avg(docs.map(d=>+d.overallSatisfaction||0))+'/10';
-  document.getElementById('k3').textContent = avg(docs.map(d=>+d.candidateQuality||0))+'/10';
-  document.getElementById('k4').textContent = avg(docs.map(d=>+d.complianceScore||0))+'/10';
-  document.getElementById('k5').textContent = avg(docs.map(d=>+d.responsiveness||0))+'/10';
-  const crit = docs.filter(d=>d.impactIfRemoved?.includes('Critical')||d.impactIfRemoved?.includes('Significant')).length;
-  document.getElementById('k6').textContent = crit+' of '+docs.length;
-
-  out.innerHTML = docs.map(renderCard).join('');
+  const avg=arr=>{const v=arr.filter(n=>n>0);return v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(1):'—';};
+  document.getElementById('k1').textContent=docs.length;
+  document.getElementById('k2').textContent=avg(docs.map(d=>+d.overallSatisfaction||0))+'/10';
+  document.getElementById('k3').textContent=avg(docs.map(d=>+d.candidateQuality||0))+'/10';
+  document.getElementById('k4').textContent=avg(docs.map(d=>+d.complianceScore||0))+'/10';
+  document.getElementById('k5').textContent=avg(docs.map(d=>+d.responsiveness||0))+'/10';
+  const crit=docs.filter(d=>d.impactIfRemoved?.includes('Critical')||d.impactIfRemoved?.includes('Significant')).length;
+  document.getElementById('k6').textContent=crit+' of '+docs.length;
+  out.innerHTML=docs.map(renderCard).join('');
 }
 
-function renderCard(d) {
+function renderCard(d){
   const nums=[+d.overallSatisfaction||0,+d.candidateQuality||0,+d.complianceScore||0,+d.responsiveness||0,+d.valueForMoney||0].filter(n=>n>0);
   const sc=nums.length?Math.round(nums.reduce((a,b)=>a+b,0)/nums.length):'—';
   const dt=d.submittedAt?new Date(d.submittedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'';
@@ -822,7 +636,7 @@ function renderCard(d) {
 </div>`;
 }
 
-function exportCSV() {
+function exportCSV(){
   const docs=getLocal();
   if(!docs.length){alert('No responses to export yet.');return;}
   const h=['Submitted At','Depot','Region','Name','Role','Headcount','Duration','Overall Satisfaction','Candidate Quality','Fill Rate','Time to Fill','Compliance','Induction Ready','Retention','Absence Rate','Responsiveness','Peak Support','PSL Ranking','Impact if Removed','Value for Money','Open Feedback'];
@@ -835,11 +649,10 @@ function exportCSV() {
 
 function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 
-// ── ON LOAD ──
 updateBadge();
-window.addEventListener('load', () => {
-  const params = new URLSearchParams(window.location.search);
-  if (params.has('reports')) openModal();
+window.addEventListener('load',()=>{
+  const params=new URLSearchParams(window.location.search);
+  if(params.has('reports'))openModal();
 });
 </script>
 </body>
