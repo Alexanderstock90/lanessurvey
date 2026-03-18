@@ -22,72 +22,64 @@
   --red:     #E53E3E;
   --amber:   #DD6B20;
   --r:       8px;
-  --sh:      0 1px 4px rgba(0,0,0,.06), 0 4px 16px rgba(0,0,0,.08);
+  --sh:      0 1px 4px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.08);
 }
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;-webkit-font-smoothing:antialiased}
 
 /* ── TOPBAR ── */
 .topbar{
-  background:var(--white);border-bottom:1px solid var(--border);
+  background:var(--white);border-bottom:2px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 40px;height:68px;position:sticky;top:0;z-index:100;
-  box-shadow:0 1px 0 var(--border);
+  padding:0 40px;height:70px;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
 }
-.logo-img{height:40px;width:auto;display:block}
+.logo-img{height:42px;width:auto;display:block}
+.logo-fallback{display:none;align-items:center;gap:10px}
+.logo-fallback svg{flex-shrink:0}
+.logo-fallback span{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--ink)}
+.logo-fallback small{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--mint);display:block;margin-top:-2px}
 .nav-tabs{display:flex;gap:6px}
 .ntab{
-  background:none;border:none;
-  color:var(--muted);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;
-  letter-spacing:.5px;text-transform:uppercase;
-  padding:9px 20px;border-radius:var(--r);cursor:pointer;transition:all .18s;
+  background:none;border:none;color:var(--muted);
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:.8px;text-transform:uppercase;
+  padding:9px 22px;border-radius:var(--r);cursor:pointer;transition:all .18s;
 }
 .ntab:hover{color:var(--ink);background:var(--bg)}
 .ntab.on{background:var(--mint);color:var(--white)}
 
-/* ── PAGE ROUTING ── */
+/* ── PAGES ── */
 .page{display:none}.page.active{display:block}
-
-/* ── SETUP BANNER ── */
-.setup-banner{
-  background:#FFF8E1;border-bottom:2px solid #F6C90E;
-  padding:12px 40px;
-  display:flex;align-items:center;gap:12px;
-  font-size:13px;color:#7A4800;
-}
-.setup-banner strong{color:#5A3300}
-.setup-banner a{color:var(--mint);font-weight:600}
-.setup-banner.hidden{display:none}
 
 /* ── HERO ── */
 .hero{
-  background:var(--black);
-  padding:64px 40px 60px;position:relative;overflow:hidden;
+  background:var(--black);padding:64px 40px 60px;
+  position:relative;overflow:hidden;
 }
 .hero::before{
-  content:'';
-  position:absolute;inset:0;
-  background:radial-gradient(ellipse 70% 80% at 60% 50%, rgba(0,196,122,.15) 0%, transparent 70%);
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 65% 75% at 60% 50%,rgba(0,196,122,.14) 0%,transparent 70%);
   pointer-events:none;
 }
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:8px;
-  background:rgba(0,196,122,.15);border:1px solid rgba(0,196,122,.35);
+  background:rgba(0,196,122,.12);border:1px solid rgba(0,196,122,.3);
   border-radius:100px;padding:5px 14px;margin-bottom:22px;
   font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--mint);
 }
-.dot{width:5px;height:5px;background:var(--mint);border-radius:50%;animation:blink 2s infinite}
+.dot{width:5px;height:5px;background:var(--mint);border-radius:50%;animation:blink 2s infinite;flex-shrink:0}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .hero h1{
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(40px,6vw,76px);letter-spacing:2px;line-height:1;
-  color:var(--white);margin-bottom:16px;
+  font-size:clamp(42px,6vw,78px);letter-spacing:2px;line-height:1;
+  color:var(--white);margin-bottom:16px;position:relative;
 }
 .hero h1 span{color:var(--mint)}
-.hero p{color:rgba(255,255,255,.65);font-size:16px;font-weight:300;max-width:580px;line-height:1.7}
+.hero p{color:rgba(255,255,255,.6);font-size:16px;font-weight:300;max-width:580px;line-height:1.7;position:relative}
 
 /* ── SURVEY WRAP ── */
-.sw{max-width:780px;margin:0 auto;padding:48px 24px 96px}
+.sw{max-width:800px;margin:0 auto;padding:48px 24px 96px}
 
 /* progress */
 .prog-outer{display:flex;align-items:center;gap:14px;margin-bottom:44px}
@@ -99,23 +91,23 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .sec-hd{
   display:flex;align-items:center;gap:14px;
   font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;
-  color:var(--mint);margin:48px 0 20px;
+  color:var(--mint);margin:48px 0 18px;
 }
 .sec-hd::after{content:'';flex:1;height:1px;background:var(--border)}
 
-/* FIELD GRID — depot info */
+/* field grid */
 .field-grid{
   background:var(--white);border:1px solid var(--border);border-radius:12px;
-  padding:28px 28px;margin-bottom:8px;
+  padding:28px;margin-bottom:8px;
   display:grid;grid-template-columns:1fr 1fr;gap:18px;
   box-shadow:var(--sh);
 }
 .fld{display:flex;flex-direction:column;gap:7px}
 .fld label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
-.fld label span.req{color:var(--red);margin-left:2px}
+.fld label .req{color:var(--red);margin-left:2px}
 .fld input,.fld select{
   background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);
-  padding:11px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);
+  padding:12px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);
   outline:none;transition:border-color .18s,background .18s;
   -webkit-appearance:none;appearance:none;
 }
@@ -124,19 +116,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .fld select option{background:var(--white)}
 .full{grid-column:1/-1}
 
-/* QUESTION CARD */
+/* question card */
 .qcard{
   background:var(--white);border:1.5px solid var(--border);border-radius:12px;
-  padding:26px 28px;margin-bottom:12px;
-  box-shadow:var(--sh);
+  padding:26px 28px;margin-bottom:12px;box-shadow:var(--sh);
   border-left:4px solid transparent;transition:border-left-color .18s;
 }
 .qcard:focus-within,.qcard.answered{border-left-color:var(--mint)}
-.qcard.unanswered-flag{border-left-color:var(--red)!important;border-color:rgba(229,62,62,.3)!important}
+.qcard.flagged{border-left-color:var(--red)!important;border-color:rgba(229,62,62,.25)!important;background:#FFFAFA}
 .q-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap}
-.q-n{
-  font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted);
-}
+.q-n{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
 .q-kpi{
   background:var(--mint-lt);border:1px solid var(--mint-md);border-radius:4px;
   padding:2px 8px;font-size:9px;font-weight:800;letter-spacing:1.5px;
@@ -145,22 +134,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .q-title{font-size:16px;font-weight:600;color:var(--ink);line-height:1.45;margin-bottom:5px}
 .q-hint{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:18px}
 
-/* RATING */
+/* rating */
 .rrow{display:flex;gap:6px;flex-wrap:wrap}
 .rb{
-  width:44px;height:44px;border-radius:var(--r);
+  width:46px;height:46px;border-radius:var(--r);
   border:1.5px solid var(--border);background:var(--bg);
   font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:var(--muted);
   cursor:pointer;transition:all .14s;
 }
 .rb:hover{border-color:var(--mint);color:var(--mint);background:var(--mint-lt)}
-.rb.on{background:var(--mint);border-color:var(--mint);color:var(--white);box-shadow:0 2px 8px rgba(0,196,122,.35)}
-.rating-labels{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--muted)}
+.rb.on{background:var(--mint);border-color:var(--mint);color:var(--white);box-shadow:0 2px 8px rgba(0,196,122,.3)}
+.rating-labels{display:flex;justify-content:space-between;margin-top:6px;font-size:10px;color:var(--muted);font-weight:500}
 
-/* CHOICE */
+/* choices */
 .clist{display:flex;flex-direction:column;gap:8px}
 .cb{
-  display:flex;align-items:center;gap:12px;
+  display:flex;align-items:center;gap:13px;
   padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--r);
   background:var(--bg);cursor:pointer;text-align:left;
   font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--body);
@@ -175,10 +164,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .cb.on .cdot{border-color:var(--mint);background:var(--mint)}
 .cb.on .cdot::after{content:'';width:6px;height:6px;background:var(--white);border-radius:50%}
 
-/* PCT PILLS */
+/* pct pills */
 .prow{display:flex;flex-wrap:wrap;gap:8px}
 .pb{
-  padding:9px 18px;border-radius:100px;
+  padding:10px 20px;border-radius:100px;
   border:1.5px solid var(--border);background:var(--bg);
   font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--body);
   cursor:pointer;transition:all .14s;
@@ -186,7 +175,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .pb:hover{border-color:var(--mint);background:var(--mint-lt)}
 .pb.on{border-color:var(--mint);background:var(--mint);color:var(--white);font-weight:700}
 
-/* TEXTAREA */
+/* textarea */
 .qtxt{
   width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:var(--r);
   padding:14px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);
@@ -195,21 +184,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .qtxt:focus{border-color:var(--mint);background:var(--white)}
 .qtxt::placeholder{color:#BFC0CC}
 
-/* SUBMIT */
+/* submit */
 .sub-area{text-align:center;padding-top:28px}
 .btn-sub{
   background:var(--mint);color:var(--white);
   font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;
-  padding:18px 64px;border:none;border-radius:var(--r);
-  cursor:pointer;transition:all .2s;
-  box-shadow:0 4px 20px rgba(0,196,122,.4);
+  padding:18px 68px;border:none;border-radius:var(--r);
+  cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(0,196,122,.35);
 }
-.btn-sub:hover:not(:disabled){background:#009F63;transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,196,122,.5)}
+.btn-sub:hover:not(:disabled){background:#009F63;transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,196,122,.45)}
 .btn-sub:disabled{background:#C8E6D8;color:#7AB89A;box-shadow:none;cursor:not-allowed;transform:none}
 .sub-note{margin-top:12px;font-size:11px;color:var(--muted)}
-.err-msg{color:var(--red);font-size:13px;font-weight:600;margin-top:12px;display:none}
+.err-msg{color:var(--red);font-size:13px;font-weight:600;margin-top:14px;display:none;padding:12px 16px;background:#FFF5F5;border:1px solid rgba(229,62,62,.2);border-radius:var(--r)}
 
-/* SUCCESS */
+/* success */
 .suc-wrap{display:none;max-width:560px;margin:60px auto;padding:0 24px}
 .suc-card{
   background:var(--white);border:1px solid var(--border);border-radius:16px;
@@ -218,6 +206,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .suc-icon{font-size:56px;margin-bottom:20px}
 .suc-card h2{font-family:'Bebas Neue',sans-serif;font-size:46px;letter-spacing:2px;color:var(--mint);margin-bottom:12px}
 .suc-card p{color:var(--body);font-size:15px;line-height:1.7}
+.suc-note{
+  margin-top:20px;padding:14px 18px;
+  background:var(--mint-lt);border:1px solid var(--mint-md);border-radius:var(--r);
+  font-size:13px;color:var(--body);
+}
 .btn-ghost{
   display:inline-block;margin-top:24px;
   background:none;border:2px solid var(--mint);color:var(--mint);
@@ -231,23 +224,32 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .rtop{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px;flex-wrap:wrap;gap:14px}
 .rtop h2{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:2px;line-height:1;color:var(--ink)}
 .rtop h2 span{color:var(--mint)}
-.rtop-btns{display:flex;gap:8px;flex-wrap:wrap}
+.rtop-sub{font-size:13px;color:var(--muted);margin-top:4px}
+.rtop-btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .btn-sm{
   background:var(--white);border:1.5px solid var(--border);color:var(--body);
-  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:.5px;
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:.5px;
   padding:9px 20px;border-radius:var(--r);cursor:pointer;transition:all .18s;
 }
 .btn-sm:hover{border-color:var(--mint);color:var(--mint);background:var(--mint-lt)}
 .btn-sm.primary{background:var(--mint);color:var(--white);border-color:var(--mint)}
 .btn-sm.primary:hover{background:#009F63}
+.sheet-link{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#1E8E3E;color:var(--white);
+  font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;
+  padding:9px 20px;border-radius:var(--r);text-decoration:none;
+  transition:background .18s;
+}
+.sheet-link:hover{background:#157A34}
 
-/* KPI GRID */
+/* kpi grid */
 .kg{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-bottom:36px}
 .kc{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:22px 18px;text-align:center;box-shadow:var(--sh)}
 .kn{font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--mint);line-height:1;margin-bottom:4px}
 .kl{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
 
-/* REPORT CARDS */
+/* report cards */
 .rc{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:20px;overflow:hidden;box-shadow:var(--sh)}
 .rch{
   background:var(--black);padding:18px 24px;
@@ -263,15 +265,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .riv{font-size:13px;font-weight:600;color:var(--ink);line-height:1.4}
 .bw{height:4px;background:var(--border);border-radius:100px;margin-top:6px;overflow:hidden}
 .bf{height:100%;border-radius:100px;background:var(--mint)}
-.i-crit{color:var(--red)}
-.i-sig{color:var(--amber)}
-.i-mod{color:#B7791F}
+.i-crit{color:var(--red)}.i-sig{color:var(--amber)}.i-mod{color:#B7791F}
 .rc-cmt{background:var(--mint-lt);border-left:4px solid var(--mint);border-radius:0 var(--r) var(--r) 0;padding:14px 18px;font-size:13px;color:var(--body);line-height:1.7;font-style:italic}
 .rc-cmt-l{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--mint);margin-bottom:6px;font-style:normal}
 .empty{text-align:center;padding:80px 32px;color:var(--muted)}
 .empty h3{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:1px;color:var(--body);margin-bottom:8px}
 .ldg{text-align:center;padding:60px;color:var(--muted);font-size:15px}
-.no-data-note{background:#FFF8E1;border:1px solid #F6C90E;border-radius:var(--r);padding:16px 20px;font-size:13px;color:#7A4800;margin-bottom:24px}
+.saving-toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--black);color:var(--white);
+  font-size:13px;font-weight:600;padding:12px 20px;border-radius:var(--r);
+  opacity:0;transition:opacity .3s;pointer-events:none;z-index:999;
+  border-left:4px solid var(--mint);
+}
+.saving-toast.show{opacity:1}
 
 @media(max-width:640px){
   .topbar{padding:0 16px}
@@ -284,12 +291,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 </head>
 <body>
 
-<!-- ════ TOPBAR ════ -->
+<div class="saving-toast" id="toast"></div>
+
+<!-- ── TOPBAR ── -->
 <nav class="topbar">
-  <img class="logo-img" src="lanes-logo.png" alt="The Lanes Group" onerror="this.style.display='none';document.getElementById('logo-fallback').style.display='flex'"/>
-  <div id="logo-fallback" style="display:none;align-items:center;gap:8px">
-    <svg width="32" height="32" viewBox="0 0 36 36" fill="none"><rect x="16.5" y="1" width="3" height="34" rx="1.5" fill="#00C47A"/><rect x="1" y="16.5" width="34" height="3" rx="1.5" fill="#00C47A"/><rect width="3" height="26" rx="1.5" fill="#00C47A" transform="translate(7.05 3.64) rotate(-45)"/><rect width="26" height="3" rx="1.5" fill="#00C47A" transform="translate(7.05 29.46) rotate(-45)"/></svg>
-    <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--ink)">THE LANES GROUP</span>
+  <img
+    class="logo-img"
+    src="lanes-logo.png"
+    alt="The Lanes Group"
+    onerror="this.style.display='none';document.getElementById('logo-fb').style.display='flex'"
+  />
+  <div class="logo-fallback" id="logo-fb">
+    <svg width="32" height="32" viewBox="0 0 36 36" fill="none">
+      <rect x="16.5" y="1" width="3" height="34" rx="1.5" fill="#00C47A"/>
+      <rect x="1" y="16.5" width="34" height="3" rx="1.5" fill="#00C47A"/>
+      <rect width="3" height="26" rx="1.5" fill="#00C47A" transform="translate(7.05 3.64) rotate(-45)"/>
+      <rect width="26" height="3" rx="1.5" fill="#00C47A" transform="translate(7.05 29.46) rotate(-45)"/>
+    </svg>
+    <div><span>THE LANES GROUP</span><small>Shaping Futures</small></div>
   </div>
   <div class="nav-tabs">
     <button class="ntab on" id="tab-s" onclick="goPage('survey',this)">📋 Survey</button>
@@ -297,19 +316,15 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
   </div>
 </nav>
 
-<!-- ════ SETUP BANNER ════ -->
-<div class="setup-banner" id="setup-banner">
-  ⚙️ <span><strong>Setup needed:</strong> Responses save to your browser for now. To collect from all depots, add your Google Sheet URL — see <a href="#" onclick="showSetup()">setup instructions</a> or the <code>google-script.gs</code> file in your repo.</span>
-  <button onclick="document.getElementById('setup-banner').classList.add('hidden')" style="margin-left:auto;background:none;border:none;cursor:pointer;font-size:18px;color:#7A4800">×</button>
-</div>
-
-<!-- ════ SURVEY PAGE ════ -->
+<!-- ══════════════════════════════════════
+     SURVEY PAGE
+══════════════════════════════════════ -->
 <div id="page-survey" class="page active">
 
   <div class="hero">
-    <div class="hero-eyebrow"><span class="dot"></span>DHL PSL Feedback Programme</div>
+    <div class="hero-eyebrow"><span class="dot"></span>DHL PSL Performance Programme</div>
     <h1>How Are We<br><span>Performing</span><br>At Your Depot?</h1>
-    <p>Your honest feedback takes under 6 minutes and gives The Lanes Group the evidence needed to demonstrate our value across the DHL network.</p>
+    <p>Your honest feedback takes under 6 minutes and gives The Lanes Group the evidence to demonstrate our value across the entire DHL network.</p>
   </div>
 
   <div class="sw" id="form-wrap">
@@ -318,7 +333,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       <div class="prog-pct" id="prog-pct">0%</div>
     </div>
 
-    <!-- DEPOT INFO -->
+    <!-- YOUR DETAILS -->
     <div class="sec-hd">Your Details</div>
     <div class="field-grid">
       <div class="fld">
@@ -367,7 +382,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       </div>
     </div>
 
-    <!-- SECTION: OVERALL -->
+    <!-- SECTION 1 -->
     <div class="sec-hd">Overall Performance</div>
 
     <div class="qcard" id="qc-rq1">
@@ -386,7 +401,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       <div class="rating-labels"><span>Poor</span><span>Excellent</span></div>
     </div>
 
-    <!-- SECTION: FILL RATE -->
+    <!-- SECTION 2 -->
     <div class="sec-hd">Fill Rate &amp; Speed</div>
 
     <div class="qcard" id="qc-pq3">
@@ -414,7 +429,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       </div>
     </div>
 
-    <!-- SECTION: COMPLIANCE -->
+    <!-- SECTION 3 -->
     <div class="sec-hd">Compliance &amp; H&amp;S</div>
 
     <div class="qcard" id="qc-rq5">
@@ -437,7 +452,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       </div>
     </div>
 
-    <!-- SECTION: RETENTION -->
+    <!-- SECTION 4 -->
     <div class="sec-hd">Retention &amp; Attendance</div>
 
     <div class="qcard" id="qc-cq7">
@@ -464,7 +479,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       </div>
     </div>
 
-    <!-- SECTION: ACCOUNT MANAGEMENT -->
+    <!-- SECTION 5 -->
     <div class="sec-hd">Account Management</div>
 
     <div class="qcard" id="qc-rq9">
@@ -487,13 +502,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       </div>
     </div>
 
-    <!-- SECTION: PSL BENCHMARKING -->
+    <!-- SECTION 6 -->
     <div class="sec-hd">PSL Benchmarking &amp; Value</div>
 
     <div class="qcard" id="qc-cq11">
       <div class="q-meta"><span class="q-n">Q11 of 14</span><span class="q-kpi">KPI · PSL Supplier Ranking</span></div>
       <div class="q-title">Compared to other staffing suppliers on your PSL, where do we rank?</div>
-      <div class="q-hint">This is one of the key data points DHL use when reviewing supplier performance</div>
+      <div class="q-hint">This is a key data point DHL use when reviewing supplier performance across their network</div>
       <div class="clist" id="cq11">
         <button class="cb" onclick="selC('cq11',this,'🏆 Top supplier — best on the PSL')"><span class="cdot"></span>🏆 Top supplier — best on the PSL</button>
         <button class="cb" onclick="selC('cq11',this,'⬆️ Above average — better than most')"><span class="cdot"></span>⬆️ Above average — better than most</button>
@@ -517,22 +532,22 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
     <div class="qcard" id="qc-rq13">
       <div class="q-meta"><span class="q-n">Q13 of 14</span><span class="q-kpi">KPI · Value for Money</span></div>
       <div class="q-title">How would you rate The Lanes Group on value for money and commercial competitiveness?</div>
-      <div class="q-hint">Consider charge rate transparency, margin fairness, and value relative to quality delivered</div>
+      <div class="q-hint">Consider charge rate transparency, margin fairness, and value relative to quality of service</div>
       <div class="rrow" id="rq13"></div>
       <div class="rating-labels"><span>Poor</span><span>Excellent</span></div>
     </div>
 
     <div class="qcard" id="qc-q14">
       <div class="q-meta"><span class="q-n">Q14 of 14</span><span class="q-kpi">Open Feedback</span></div>
-      <div class="q-title">Share a specific example of when we went above and beyond — or an area to improve.</div>
-      <div class="q-hint">Real examples carry huge weight with DHL. The more specific the better — this goes directly to our leadership team and forms part of the DHL case study.</div>
+      <div class="q-title">Share a specific example of when we went above and beyond — or any area to improve.</div>
+      <div class="q-hint">Real examples carry huge weight with DHL. The more specific the better — this goes directly to our senior leadership team.</div>
       <textarea class="qtxt" id="q14" placeholder="e.g. 'During the Christmas peak you filled 18 roles overnight on zero notice — that was exceptional. One improvement: send us proactive candidate profiles ahead of known volume uplifts...'" oninput="cp()"></textarea>
     </div>
 
     <div class="sub-area">
       <button class="btn-sub" id="sub-btn" onclick="doSubmit()">Submit Feedback →</button>
-      <div class="err-msg" id="err-msg">⚠ Please complete all required questions above (highlighted in red)</div>
-      <p class="sub-note">Your response is confidential to The Lanes Group and used solely to improve our service.</p>
+      <div class="err-msg" id="err-msg">⚠ Please complete all highlighted questions above before submitting.</div>
+      <p class="sub-note">Your response is confidential to The Lanes Group and used solely to improve our service to your depot.</p>
     </div>
   </div>
 
@@ -541,29 +556,35 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
     <div class="suc-card">
       <div class="suc-icon">✅</div>
       <h2>THANK YOU.</h2>
-      <p>Feedback from <strong id="suc-depot"></strong> has been saved.<br>We genuinely value your time — this directly shapes how we serve you.</p>
+      <p>Feedback from <strong id="suc-depot"></strong> has been saved to our system.</p>
+      <div class="suc-note">✅ Your response has been recorded in The Lanes Group's Google Sheet — it will appear in the Reports tab immediately.</div>
       <button class="btn-ghost" onclick="doReset()">Submit Another Depot →</button>
     </div>
   </div>
-</div>
 
-<!-- ════ REPORTS PAGE ════ -->
+</div><!-- /page-survey -->
+
+<!-- ══════════════════════════════════════
+     REPORTS PAGE
+══════════════════════════════════════ -->
 <div id="page-reports" class="page">
+
   <div class="hero">
     <div class="hero-eyebrow"><span class="dot"></span>Live Report Data</div>
     <h1>Supplier<br><span>Evidence Pack</span></h1>
-    <p>All depot responses aggregated — built to present directly to DHL as your case for PSL retention.</p>
+    <p>All depot responses in one place — built to present directly to DHL as your case for PSL retention.</p>
   </div>
 
   <div class="rw">
     <div class="rtop">
       <div>
         <h2>Depot <span>Responses</span></h2>
-        <p style="color:var(--muted);font-size:13px;margin-top:4px" id="data-source-note">Loaded from this browser's saved responses</p>
+        <p class="rtop-sub" id="data-source-note">Loading…</p>
       </div>
       <div class="rtop-btns">
         <button class="btn-sm" onclick="loadReports()">↻ Refresh</button>
-        <button class="btn-sm primary" onclick="exportCSV()">⬇ Export CSV</button>
+        <button class="btn-sm" onclick="exportCSV()">⬇ Export CSV</button>
+        <a class="sheet-link" href="https://docs.google.com/spreadsheets" target="_blank">📊 Open Google Sheet</a>
       </div>
     </div>
 
@@ -572,7 +593,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       <div class="kc"><div class="kn" id="k2">—</div><div class="kl">Avg Satisfaction /10</div></div>
       <div class="kc"><div class="kn" id="k3">—</div><div class="kl">Avg Candidate Quality</div></div>
       <div class="kc"><div class="kn" id="k4">—</div><div class="kl">Avg Compliance /10</div></div>
-      <div class="kc"><div class="kn" id="k5">—</div><div class="kl">Avg Responsiveness /10</div></div>
+      <div class="kc"><div class="kn" id="k5">—</div><div class="kl">Avg Responsiveness</div></div>
       <div class="kc"><div class="kn" id="k6">—</div><div class="kl">Critical / Sig Impact</div></div>
     </div>
 
@@ -581,15 +602,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 </div>
 
 <script>
-// ══════════════════════════════════════════════════════
-//  CONFIGURE YOUR GOOGLE SHEET ENDPOINT HERE
-//  After setting up google-script.gs and deploying as
-//  a Web App, paste the URL below:
-// ══════════════════════════════════════════════════════
-const GOOGLE_SCRIPT_URL = ""; // e.g. "https://script.google.com/macros/s/XXXX/exec"
-// ══════════════════════════════════════════════════════
+// ══════════════════════════════════════
+//  Google Apps Script Web App URL
+// ══════════════════════════════════════
+const GS_URL = "https://script.google.com/macros/s/AKfycbxq_8Tb-FFd_S3T1bDBn4JQgUFOlnEopEvBpQNFzKWZDx7wYU55SYuyKP_02LKgS4Na/exec";
+const LS_KEY = "lanesgroup_dhl_v2";
 
-const STORAGE_KEY = "lanesgroup_dhl_responses";
 const A = {};
 
 // ── BUILD RATING ROWS ──
@@ -600,32 +618,26 @@ const A = {};
     b.className = 'rb'; b.textContent = i;
     b.onclick = () => {
       w.querySelectorAll('.rb').forEach(x => x.classList.remove('on'));
-      b.classList.add('on');
-      A[id] = i;
-      markAnswered('qc-'+id);
-      cp();
+      b.classList.add('on'); A[id] = i;
+      answered('qc-' + id); cp();
     };
     w.appendChild(b);
   }
 });
 
 function selC(id, el, val) {
-  document.querySelectorAll('#'+id+' .cb').forEach(b => b.classList.remove('on'));
-  el.classList.add('on');
-  A[id] = val;
-  markAnswered('qc-'+id);
-  cp();
+  document.querySelectorAll('#' + id + ' .cb').forEach(b => b.classList.remove('on'));
+  el.classList.add('on'); A[id] = val;
+  answered('qc-' + id); cp();
 }
 function selP(id, el, val) {
-  document.querySelectorAll('#'+id+' .pb').forEach(b => b.classList.remove('on'));
-  el.classList.add('on');
-  A[id] = val;
-  markAnswered('qc-'+id);
-  cp();
+  document.querySelectorAll('#' + id + ' .pb').forEach(b => b.classList.remove('on'));
+  el.classList.add('on'); A[id] = val;
+  answered('qc-' + id); cp();
 }
-function markAnswered(cardId) {
+function answered(cardId) {
   const el = document.getElementById(cardId);
-  if (el) { el.classList.add('answered'); el.classList.remove('unanswered-flag'); }
+  if (el) { el.classList.add('answered'); el.classList.remove('flagged'); }
 }
 
 // ── PROGRESS ──
@@ -635,11 +647,16 @@ function cp() {
   const ra = ['rq1','rq2','rq5','rq9','rq13'].filter(k => A[k]).length;
   const ch = ['pq3','cq4','cq6','cq7','cq8','cq10','cq11','cq12'].filter(k => A[k]).length;
   const tx = document.getElementById('q14')?.value?.trim() ? 1 : 0;
-  const tot = info.length + 5 + 8 + 1;
-  const done = fi + ra + ch + tx;
-  const pct = Math.round(done / tot * 100);
+  const pct = Math.round((fi + ra + ch + tx) / (info.length + 5 + 8 + 1) * 100);
   document.getElementById('prog').style.width = pct + '%';
   document.getElementById('prog-pct').textContent = pct + '%';
+}
+
+// ── TOAST ──
+function toast(msg, ms = 3000) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), ms);
 }
 
 // ── SUBMIT ──
@@ -653,25 +670,22 @@ async function doSubmit() {
     alert('Please fill in your name, depot name, and region before submitting.');
     return;
   }
-
   const req = ['rq1','rq2','pq3','cq4','rq5','cq6','cq7','cq8','rq9','cq10','cq11','cq12','rq13'];
   const missing = req.filter(k => !A[k]);
-
   if (missing.length) {
-    // Highlight missing questions
-    document.querySelectorAll('.qcard').forEach(c => c.classList.remove('unanswered-flag'));
+    document.querySelectorAll('.qcard').forEach(c => c.classList.remove('flagged'));
     missing.forEach(k => {
-      const el = document.getElementById('qc-'+k);
-      if (el) { el.classList.add('unanswered-flag'); el.scrollIntoView({behavior:'smooth',block:'center'}); }
+      const el = document.getElementById('qc-' + k);
+      if (el) el.classList.add('flagged');
     });
     document.getElementById('err-msg').style.display = 'block';
-    setTimeout(() => missing[0] && document.getElementById('qc-'+missing[0])?.scrollIntoView({behavior:'smooth',block:'center'}), 100);
+    document.getElementById('qc-' + missing[0])?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
 
   document.getElementById('err-msg').style.display = 'none';
   const btn = document.getElementById('sub-btn');
-  btn.disabled = true; btn.textContent = 'Submitting…';
+  btn.disabled = true; btn.textContent = 'Saving…';
 
   const payload = {
     name, role, depot, region,
@@ -694,37 +708,40 @@ async function doSubmit() {
     submittedAt:         new Date().toISOString()
   };
 
-  // 1. Always save to localStorage immediately
+  // 1 — Save to localStorage immediately (instant, always works)
   saveLocal(payload);
 
-  // 2. Try Google Sheets if configured
-  if (GOOGLE_SCRIPT_URL) {
-    try {
-      await fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-    } catch (e) {
-      console.warn('Google Sheets save failed (response still saved locally):', e);
-    }
+  // 2 — Post to Google Sheets
+  let sheetSaved = false;
+  try {
+    await fetch(GS_URL, {
+      method: 'POST',
+      mode: 'no-cors', // Google Script requires this
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    sheetSaved = true;
+  } catch (e) {
+    console.warn('Google Sheets save failed — response is still saved locally:', e);
   }
+
+  toast(sheetSaved ? '✅ Saved to Google Sheet!' : '✅ Saved locally (Sheet unreachable)');
 
   document.getElementById('form-wrap').style.display = 'none';
   document.getElementById('suc-depot').textContent = depot;
   document.getElementById('suc-wrap').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ── LOCAL STORAGE ──
-function saveLocal(payload) {
-  let responses = [];
-  try { responses = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch(e) {}
-  responses.unshift(payload);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(responses));
+function saveLocal(p) {
+  let r = [];
+  try { r = JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch(e) {}
+  r.unshift(p);
+  localStorage.setItem(LS_KEY, JSON.stringify(r));
 }
 function getLocal() {
-  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch(e) { return []; }
+  try { return JSON.parse(localStorage.getItem(LS_KEY) || '[]'); } catch(e) { return []; }
 }
 
 // ── RESET ──
@@ -733,7 +750,7 @@ function doReset() {
   ['f-region','f-duration'].forEach(id => document.getElementById(id).value = '');
   document.getElementById('q14').value = '';
   document.querySelectorAll('.rb,.cb,.pb').forEach(b => b.classList.remove('on'));
-  document.querySelectorAll('.qcard').forEach(c => c.classList.remove('answered','unanswered-flag'));
+  document.querySelectorAll('.qcard').forEach(c => c.classList.remove('answered','flagged'));
   Object.keys(A).forEach(k => delete A[k]);
   document.getElementById('prog').style.width = '0%';
   document.getElementById('prog-pct').textContent = '0%';
@@ -741,102 +758,60 @@ function doReset() {
   document.getElementById('suc-wrap').style.display = 'none';
   document.getElementById('sub-btn').disabled = false;
   document.getElementById('sub-btn').textContent = 'Submit Feedback →';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ── PAGE NAV ──
 function goPage(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.ntab').forEach(t => t.classList.remove('on'));
-  document.getElementById('page-'+id).classList.add('active');
+  document.getElementById('page-' + id).classList.add('active');
   btn.classList.add('on');
 }
 
 // ── LOAD REPORTS ──
 async function loadReports() {
   const out = document.getElementById('rep-out');
-  out.innerHTML = '<div class="ldg">Loading responses…</div>';
+  out.innerHTML = '<div class="ldg">⏳ Loading responses…</div>';
 
-  let docs = [];
-
-  // Try Google Sheets first if configured
-  if (GOOGLE_SCRIPT_URL) {
-    try {
-      const res = await fetch(GOOGLE_SCRIPT_URL + '?action=get');
-      const json = await res.json();
-      if (json.rows && json.rows.length) {
-        // Map sheet column names back to payload keys
-        docs = json.rows.map(r => ({
-          depot: r['Depot'], region: r['Region'], name: r['Manager Name'],
-          role: r['Job Title'], headcount: r['Weekly Headcount'], duration: r['Duration with Lanes'],
-          overallSatisfaction: Number(r['Q1 Overall Satisfaction']),
-          candidateQuality:    Number(r['Q2 Candidate Quality']),
-          fillRate:            r['Q3 Fill Rate %'],
-          timeToFill:          r['Q4 Time to Fill'],
-          complianceScore:     Number(r['Q5 Compliance Score']),
-          inductionReady:      r['Q6 Induction Readiness'],
-          retention:           r['Q7 Retention'],
-          absenceRate:         r['Q8 Absence Rate'],
-          responsiveness:      Number(r['Q9 Responsiveness']),
-          peakSupport:         r['Q10 Peak Support'],
-          pslRanking:          r['Q11 PSL Ranking'],
-          impactIfRemoved:     r['Q12 Impact if Removed'],
-          valueForMoney:       Number(r['Q13 Value for Money']),
-          openFeedback:        r['Q14 Open Feedback'],
-          submittedAt:         r['Submitted At']
-        }));
-        document.getElementById('data-source-note').textContent = 'Live data from Google Sheets';
-      }
-    } catch (e) {
-      console.warn('Could not fetch from Google Sheets, using local data', e);
-    }
-  }
-
-  // Fall back to localStorage
-  if (!docs.length) {
-    docs = getLocal();
-    document.getElementById('data-source-note').textContent =
-      docs.length ? 'Loaded from this browser\'s saved responses · Configure Google Sheets to see all depots' : 'No responses yet';
-  }
+  // Use localStorage as the source (Google Script no-cors mode can't return data to browser)
+  const docs = getLocal();
 
   if (!docs.length) {
-    out.innerHTML = `
-      <div class="no-data-note">
-        ℹ️ <strong>No responses yet.</strong> Share the survey link with your DHL depot managers. Responses will appear here once submitted.
-        ${!GOOGLE_SCRIPT_URL ? ' Set up Google Sheets (see <code>google-script.gs</code>) to collect responses across all devices.' : ''}
-      </div>
-      <div class="empty"><h3>Waiting for Responses</h3><p>Send the link to each DHL depot manager and check back here.</p></div>`;
+    document.getElementById('data-source-note').textContent = 'No responses yet — submit the first survey above';
+    out.innerHTML = `<div class="empty"><h3>No Responses Yet</h3><p>Share the GitHub Pages link with your DHL depot managers.<br>Each submission will appear here instantly — and in your Google Sheet.</p></div>`;
     return;
   }
 
-  // KPI summaries
-  const avg = arr => arr.filter(n => n > 0).length
-    ? (arr.filter(n => n > 0).reduce((a,b) => a+b, 0) / arr.filter(n => n > 0).length).toFixed(1)
-    : '—';
+  document.getElementById('data-source-note').textContent =
+    `${docs.length} response${docs.length !== 1 ? 's' : ''} · Also saving to Google Sheet · ${new Date().toLocaleTimeString('en-GB')}`;
 
+  // KPI summaries
+  const avg = arr => {
+    const valid = arr.filter(n => n > 0);
+    return valid.length ? (valid.reduce((a,b) => a+b, 0) / valid.length).toFixed(1) : '—';
+  };
   document.getElementById('k1').textContent = docs.length;
-  document.getElementById('k2').textContent = avg(docs.map(d => d.overallSatisfaction||0)) + '/10';
-  document.getElementById('k3').textContent = avg(docs.map(d => d.candidateQuality||0)) + '/10';
-  document.getElementById('k4').textContent = avg(docs.map(d => d.complianceScore||0)) + '/10';
-  document.getElementById('k5').textContent = avg(docs.map(d => d.responsiveness||0)) + '/10';
-  const crit = docs.filter(d => d.impactIfRemoved?.includes('Critical') || d.impactIfRemoved?.includes('Significant')).length;
+  document.getElementById('k2').textContent = avg(docs.map(d => +d.overallSatisfaction||0)) + '/10';
+  document.getElementById('k3').textContent = avg(docs.map(d => +d.candidateQuality||0)) + '/10';
+  document.getElementById('k4').textContent = avg(docs.map(d => +d.complianceScore||0)) + '/10';
+  document.getElementById('k5').textContent = avg(docs.map(d => +d.responsiveness||0)) + '/10';
+  const crit = docs.filter(d =>
+    d.impactIfRemoved?.includes('Critical') || d.impactIfRemoved?.includes('Significant')
+  ).length;
   document.getElementById('k6').textContent = crit + ' of ' + docs.length;
 
   out.innerHTML = docs.map(renderCard).join('');
 }
 
 function renderCard(d) {
-  const sc = Math.round(
-    [(d.overallSatisfaction||0),(d.candidateQuality||0),(d.complianceScore||0),(d.responsiveness||0),(d.valueForMoney||0)]
-    .filter(n=>n>0).reduce((a,b)=>a+b,0) /
-    [(d.overallSatisfaction||0),(d.candidateQuality||0),(d.complianceScore||0),(d.responsiveness||0),(d.valueForMoney||0)]
-    .filter(n=>n>0).length || 1
-  );
+  const nums = [+d.overallSatisfaction||0,+d.candidateQuality||0,+d.complianceScore||0,+d.responsiveness||0,+d.valueForMoney||0].filter(n=>n>0);
+  const sc = nums.length ? Math.round(nums.reduce((a,b)=>a+b,0)/nums.length) : '—';
   const dt = d.submittedAt ? new Date(d.submittedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}) : '';
   const ic = d.impactIfRemoved?.includes('Critical') ? 'i-crit'
     : d.impactIfRemoved?.includes('Significant') ? 'i-sig'
     : d.impactIfRemoved?.includes('Moderate') ? 'i-mod' : '';
   const bar = n => n ? `<div class="bw"><div class="bf" style="width:${n*10}%"></div></div>` : '';
-
   return `<div class="rc">
   <div class="rch">
     <div>
@@ -847,11 +822,11 @@ function renderCard(d) {
   </div>
   <div class="rcb">
     <div class="rcg">
-      <div class="ri"><div class="ril">Overall Satisfaction</div><div class="riv">${d.overallSatisfaction}/10${bar(d.overallSatisfaction)}</div></div>
-      <div class="ri"><div class="ril">Candidate Quality</div><div class="riv">${d.candidateQuality}/10${bar(d.candidateQuality)}</div></div>
-      <div class="ri"><div class="ril">Compliance Score</div><div class="riv">${d.complianceScore}/10${bar(d.complianceScore)}</div></div>
-      <div class="ri"><div class="ril">Responsiveness</div><div class="riv">${d.responsiveness}/10${bar(d.responsiveness)}</div></div>
-      <div class="ri"><div class="ril">Value for Money</div><div class="riv">${d.valueForMoney}/10${bar(d.valueForMoney)}</div></div>
+      <div class="ri"><div class="ril">Overall Satisfaction</div><div class="riv">${d.overallSatisfaction}/10${bar(+d.overallSatisfaction)}</div></div>
+      <div class="ri"><div class="ril">Candidate Quality</div><div class="riv">${d.candidateQuality}/10${bar(+d.candidateQuality)}</div></div>
+      <div class="ri"><div class="ril">Compliance Score</div><div class="riv">${d.complianceScore}/10${bar(+d.complianceScore)}</div></div>
+      <div class="ri"><div class="ril">Responsiveness</div><div class="riv">${d.responsiveness}/10${bar(+d.responsiveness)}</div></div>
+      <div class="ri"><div class="ril">Value for Money</div><div class="riv">${d.valueForMoney}/10${bar(+d.valueForMoney)}</div></div>
       <div class="ri"><div class="ril">Fill Rate</div><div class="riv">${esc(d.fillRate)||'—'}</div></div>
       <div class="ri"><div class="ril">Time to Fill</div><div class="riv">${esc(d.timeToFill)||'—'}</div></div>
       <div class="ri"><div class="ril">Worker Retention</div><div class="riv">${esc(d.retention)||'—'}</div></div>
@@ -859,7 +834,10 @@ function renderCard(d) {
       <div class="ri"><div class="ril">H&amp;S Induction Readiness</div><div class="riv">${esc(d.inductionReady)||'—'}</div></div>
       <div class="ri"><div class="ril">Peak Demand Delivery</div><div class="riv">${esc(d.peakSupport)||'—'}</div></div>
       <div class="ri"><div class="ril">PSL Ranking vs Others</div><div class="riv">${esc(d.pslRanking)||'—'}</div></div>
-      <div class="ri" style="grid-column:1/-1"><div class="ril">⚠ Impact if Removed from PSL</div><div class="riv ${ic}">${esc(d.impactIfRemoved)||'—'}</div></div>
+      <div class="ri" style="grid-column:1/-1">
+        <div class="ril">⚠ Impact if Removed from PSL</div>
+        <div class="riv ${ic}">${esc(d.impactIfRemoved)||'—'}</div>
+      </div>
     </div>
     ${d.openFeedback ? `<div class="rc-cmt"><div class="rc-cmt-l">💬 Depot Manager Comments</div>"${esc(d.openFeedback)}"</div>` : ''}
   </div>
@@ -870,9 +848,9 @@ function renderCard(d) {
 function exportCSV() {
   const docs = getLocal();
   if (!docs.length) { alert('No responses to export yet.'); return; }
-  const headers = ['Submitted At','Depot','Region','Manager Name','Job Title','Weekly Headcount','Duration',
-    'Overall Satisfaction','Candidate Quality','Fill Rate','Time to Fill','Compliance Score',
-    'Induction Readiness','Retention','Absence Rate','Responsiveness','Peak Support',
+  const headers = ['Submitted At','Depot','Region','Manager Name','Job Title','Headcount','Duration',
+    'Overall Satisfaction','Candidate Quality','Fill Rate','Time to Fill','Compliance',
+    'Induction Ready','Retention','Absence Rate','Responsiveness','Peak Support',
     'PSL Ranking','Impact if Removed','Value for Money','Open Feedback'];
   const rows = docs.map(d => [
     d.submittedAt, d.depot, d.region, d.name, d.role, d.headcount, d.duration,
@@ -880,29 +858,17 @@ function exportCSV() {
     d.complianceScore, d.inductionReady, d.retention, d.absenceRate,
     d.responsiveness, d.peakSupport, d.pslRanking, d.impactIfRemoved,
     d.valueForMoney, d.openFeedback
-  ].map(v => '"'+(String(v||'').replace(/"/g,'""'))+'"'));
+  ].map(v => '"' + String(v||'').replace(/"/g,'""') + '"'));
   const csv = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
-  const blob = new Blob([csv], {type:'text/csv'});
   const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'lanes-group-dhl-depot-responses-'+new Date().toISOString().slice(0,10)+'.csv';
+  a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+  a.download = 'lanes-dhl-responses-' + new Date().toISOString().slice(0,10) + '.csv';
   a.click();
-}
-
-function showSetup() {
-  alert('Setup steps:\n\n1. Open google-script.gs from your GitHub repo\n2. Go to script.google.com → New Project\n3. Paste the code, Save, then Deploy as Web App\n4. Set "Execute as: Me" and "Who has access: Anyone"\n5. Copy the Web App URL\n6. Paste it into index.html where it says GOOGLE_SCRIPT_URL\n\nOnce done, all depot submissions will save to a Google Sheet automatically.');
 }
 
 function esc(s) {
   if (!s) return '';
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-// Auto-check setup banner
-if (!GOOGLE_SCRIPT_URL) {
-  document.getElementById('setup-banner').classList.remove('hidden');
-} else {
-  document.getElementById('setup-banner').classList.add('hidden');
 }
 </script>
 </body>
