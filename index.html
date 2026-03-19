@@ -442,9 +442,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const LS_KEY = "lanesgroup_dhl_v2";
-const JB_BIN_ID = "69bbc7eec3097a1dd53c0da1";
-const JB_API_KEY = "$2a$10$BwIaUS06Nh5.IOYWIA64ju0O7LxMzGXGlmnieaw36/zn5bBhkk2je";
-const JB_URL = `https://api.jsonbin.io/v3/b/${JB_BIN_ID}`;
+const AT_BASE_ID = "appu5F2DcLJAblhHd";
+const AT_TABLE_ID = "tbl12sku92RJuWrCA";
+const AT_TOKEN = "patQHawcTqAREtJeS.d09956ef64d37cd711ad0e56663ff0859b4d20a21ab80a49496f93e80f3128d0";
+const AT_URL = `https://api.airtable.com/v0/${AT_BASE_ID}/${AT_TABLE_ID}`;
 
 const USERS = [
   { username: "Lanes",  password: "Lanes007", role: "admin",  label: "Lanes Group Admin" },
@@ -550,24 +551,10 @@ async function doSubmit(){
   };
   saveLocal(payload);
   updateBadge();
-  // Save to JSONBin cloud storage
-  try{
-    const existing=await fetchFromJSONBin();
-    const updated=[payload,...existing];
-    const res=await fetch(JB_URL,{
-      method:'PUT',
-      headers:{'Content-Type':'application/json','X-Master-Key':JB_API_KEY},
-      body:JSON.stringify({responses:updated})
-    });
-    if(!res.ok){
-      console.error('JSONBin PUT failed:',res.status,res.statusText);
-      showToast('⚠ Saved locally only — cloud sync failed');
-    } else {
-      console.log('JSONBin save success');
-      showToast('✅ Response saved to cloud!');
-    }
-  }catch(e){
-    console.error('JSONBin save error:',e);
+  const saved=await saveToAirtable(payload);
+  if(saved){
+    showToast('✅ Response saved to cloud!');
+  } else {
     showToast('⚠ Saved locally only — cloud sync failed');
   }
   document.getElementById('form-wrap').style.display='none';
@@ -596,31 +583,56 @@ function doReset(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-async function fetchFromJSONBin(){
+async function fetchFromAirtable(){
   try{
-    const res=await fetch(JB_URL+'/latest',{
-      method:'GET',
-      headers:{'X-Master-Key':JB_API_KEY,'X-Bin-Meta':'false'}
+    const res=await fetch(AT_URL+'?maxRecords=500',{
+      headers:{'Authorization':'Bearer '+AT_TOKEN}
     });
-    if(!res.ok){console.error('JSONBin GET failed:',res.status,res.statusText);return[];}
+    if(!res.ok){console.error('Airtable GET failed:',res.status,res.statusText);return[];}
     const data=await res.json();
-    console.log('JSONBin data fetched:',data);
-    return Array.isArray(data.responses)?data.responses:[];
+    console.log('Airtable data:',data);
+    return (data.records||[]).map(r=>({...JSON.parse(r.fields.Data||'{}'),_atId:r.id}));
   }catch(e){
-    console.error('JSONBin fetch error:',e);
+    console.error('Airtable fetch error:',e);
     return[];
   }
+}
+
+async function saveToAirtable(payload){
+  try{
+    const res=await fetch(AT_URL,{
+      method:'POST',
+      headers:{'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application/json'},
+      body:JSON.stringify({records:[{fields:{Name:payload.depot||'Response',Data:JSON.stringify(payload)}}]})
+    });
+    if(!res.ok){console.error('Airtable POST failed:',res.status,await res.text());return false;}
+    console.log('Airtable save success');
+    return true;
+  }catch(e){
+    console.error('Airtable save error:',e);
+    return false;
+  }
+}
+
+async function deleteFromAirtable(atId){
+  try{
+    const res=await fetch(AT_URL+'/'+atId,{
+      method:'DELETE',
+      headers:{'Authorization':'Bearer '+AT_TOKEN}
+    });
+    return res.ok;
+  }catch(e){return false;}
 }
 
 async function loadReports(){
   const out=document.getElementById('rep-out');
   document.getElementById('data-note').textContent='Fetching live data…';
   out.innerHTML=`<div class="loading-cards">${[1,2,3].map(()=>`<div class="skel"><div class="skel-hd"></div><div class="skel-line w80"></div><div class="skel-line w60"></div><div class="skel-line w50"></div></div>`).join('')}</div>`;
-  let docs=await fetchFromJSONBin();
+  let docs=await fetchFromAirtable();
   if(!docs.length){
     docs=getLocal();
     if(docs.length){
-      document.getElementById('data-note').textContent=`⚠ Showing ${docs.length} local response${docs.length!==1?'s':''} — could not reach cloud storage`;
+      document.getElementById('data-note').textContent=`⚠ Showing ${docs.length} local response${docs.length!==1?'s':''} — could not reach cloud`;
       showToast('⚠ Could not reach cloud — showing local data');
     } else {
       document.getElementById('data-note').textContent='No responses yet';
@@ -658,7 +670,7 @@ function renderCard(d){
     <div><div class="rc-name">${esc(d.depot)}</div>
     <div class="rc-meta">${esc(d.name)} · ${esc(d.role)} · ${esc(d.region)}${d.headcount?' · ~'+esc(d.headcount)+' workers/wk':''}${d.duration?' · '+esc(d.duration):''}${dt?' · '+dt:''}</div></div>
     <div class="rc-score">⭐ ${sc}/10</div>
-    <button class="btn-delete admin-only" onclick="deleteResponse('${esc(d.submittedAt)}')">🗑 Delete</button>
+    <button class="btn-delete admin-only" onclick="deleteResponse('${esc(d._atId||'')}','${esc(d.submittedAt)}')">🗑 Delete</button>
   </div>
   <div class="rcb">
     <div class="rcg">
@@ -680,28 +692,19 @@ function renderCard(d){
 </div>`;
 }
 
-async function deleteResponse(submittedAt){
+async function deleteResponse(atId,submittedAt){
   if(!confirm('Are you sure you want to delete this response? This cannot be undone.'))return;
-  // Remove from localStorage
   let r=getLocal();
   r=r.filter(d=>d.submittedAt!==submittedAt);
   localStorage.setItem(LS_KEY,JSON.stringify(r));
   updateBadge();
-  // Remove from JSONBin
-  try{
-    const all=await fetchFromJSONBin();
-    const updated=all.filter(d=>d.submittedAt!==submittedAt);
-    await fetch(JB_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':JB_API_KEY},body:JSON.stringify({responses:updated})});
-  }catch(e){console.warn('JSONBin delete failed:',e);}
+  if(atId) await deleteFromAirtable(atId);
   showToast('🗑 Response deleted');
   loadReports();
 }
 
 async function exportExcel(){
-  const docs=await fetchFromJSONBin();
-  const allDocs=docs.length?docs:getLocal();
-  if(!allDocs.length){alert('No responses to export yet.');return;}
-  const headers=['Date','Depot','Region','Manager Name','Job Title','Weekly Headcount','Duration with Lanes','Q1 Satisfaction','Q2 Candidate Quality','Q3 Fill Rate','Q4 Time to Fill','Q5 Compliance','Q6 Induction Ready','Q7 Retention','Q8 Absence Rate','Q9 Responsiveness','Q10 Peak Support','Q11 PSL Ranking','Q12 Value for Money','Q13 Open Feedback'];
+  const docs=await fetchFromAirtable();,'Job Title','Weekly Headcount','Duration with Lanes','Q1 Satisfaction','Q2 Candidate Quality','Q3 Fill Rate','Q4 Time to Fill','Q5 Compliance','Q6 Induction Ready','Q7 Retention','Q8 Absence Rate','Q9 Responsiveness','Q10 Peak Support','Q11 PSL Ranking','Q12 Value for Money','Q13 Open Feedback'];
   const rows=allDocs.map(d=>[
     d.submittedAt?new Date(d.submittedAt).toLocaleDateString('en-GB'):'',
     d.depot||'',d.region||'',d.name||'',d.role||'',d.headcount||'',d.duration||'',
@@ -719,7 +722,7 @@ async function exportExcel(){
 }
 
 async function exportPDF(){
-  const docs=await fetchFromJSONBin();
+  const docs=await fetchFromAirtable();
   const allDocs=docs.length?docs:getLocal();
   if(!allDocs.length){alert('No responses to export yet.');return;}
 
