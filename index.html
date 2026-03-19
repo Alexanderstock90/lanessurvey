@@ -642,9 +642,11 @@ function exportCSV(){
   const docs=getLocal();
   if(!docs.length){alert('No responses to export yet.');return;}
 
-  const headers=['Submitted At','Depot','Region','Manager Name','Job Title','Weekly Headcount','Duration with Lanes','Q1 Overall Satisfaction','Q2 Candidate Quality','Q3 Fill Rate','Q4 Time to Fill','Q5 Compliance Score','Q6 Induction Readiness','Q7 Retention','Q8 Absence Rate','Q9 Responsiveness','Q10 Peak Support','Q11 PSL Ranking','Q12 Value for Money','Q13 Open Feedback'];
+  const avg=arr=>{const v=arr.filter(n=>+n>0);return v.length?(v.reduce((a,b)=>a+(+b),0)/v.length).toFixed(1):'N/A';};
 
-  const rows=docs.map(d=>[
+  const headers=['Date','Depot','Region','Manager Name','Job Title','Weekly Headcount','Duration with Lanes','Q1 Overall Satisfaction','Q2 Candidate Quality','Q3 Fill Rate','Q4 Time to Fill','Q5 Compliance Score','Q6 Induction Readiness','Q7 Retention','Q8 Absence Rate','Q9 Responsiveness','Q10 Peak Support','Q11 PSL Ranking','Q12 Value for Money','Q13 Open Feedback'];
+
+  const rowsData=docs.map(d=>[
     d.submittedAt?new Date(d.submittedAt).toLocaleDateString('en-GB'):'',
     d.depot||'',d.region||'',d.name||'',d.role||'',
     d.headcount||'',d.duration||'',
@@ -657,62 +659,43 @@ function exportCSV(){
     d.openFeedback||''
   ]);
 
-  // Build worksheet data with headers
-  const wsData=[headers,...rows];
-  const ws=XLSX.utils.aoa_to_sheet(wsData);
+  const headerRow=headers.map(h=>`<th style="background:#00C47A;color:#ffffff;font-family:Arial;font-size:11px;font-weight:bold;padding:8px 10px;border:1px solid #009F63;text-align:center;white-space:nowrap;">${h}</th>`).join('');
 
-  // Column widths
-  ws['!cols']=[
-    {wch:18},{wch:30},{wch:20},{wch:22},{wch:22},{wch:18},{wch:20},
-    {wch:10},{wch:10},{wch:28},{wch:28},{wch:10},{wch:28},
-    {wch:28},{wch:28},{wch:10},{wch:28},{wch:32},{wch:10},{wch:60}
-  ];
+  const dataRows=rowsData.map((row,i)=>
+    '<tr>'+row.map(cell=>`<td style="font-family:Arial;font-size:10px;padding:6px 10px;border:1px solid #E2E2EC;background:${i%2===0?'#F8F8FB':'#FFFFFF'};vertical-align:top;">${String(cell).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</td>`).join('')+'</tr>'
+  ).join('');
 
-  // Style header row — bold, mint green background
-  const mintFill={fgColor:{rgb:'00C47A'}};
-  const whiteFont={bold:true,color:{rgb:'FFFFFF'},name:'Arial',sz:10};
-  headers.forEach((_,i)=>{
-    const cell=XLSX.utils.encode_cell({r:0,c:i});
-    if(!ws[cell])return;
-    ws[cell].s={fill:mintFill,font:whiteFont,alignment:{horizontal:'center',wrapText:true}};
-  });
+  const html=`
+<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta charset="UTF-8">
+<!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets>
+<x:ExcelWorksheet><x:Name>Depot Responses</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+<x:ExcelWorksheet><x:Name>Summary</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet>
+</x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->
+</head><body>
+<table style="border-collapse:collapse;width:100%">
+  <thead><tr>${headerRow}</tr></thead>
+  <tbody>${dataRows}</tbody>
+</table>
 
-  // Style data rows — alternating light background
-  rows.forEach((_,ri)=>{
-    headers.forEach((__,ci)=>{
-      const cell=XLSX.utils.encode_cell({r:ri+1,c:ci});
-      if(!ws[cell])return;
-      ws[cell].s={
-        fill:{fgColor:{rgb:ri%2===0?'F8F8FB':'FFFFFF'}},
-        font:{name:'Arial',sz:10},
-        alignment:{wrapText:true,vertical:'top'}
-      };
-    });
-  });
+<br/><br/>
 
-  // Create workbook
-  const wb=XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb,ws,'Depot Responses');
+<table style="border-collapse:collapse;">
+  <tr><td colspan="2" style="font-family:Arial;font-size:14px;font-weight:bold;background:#0D0D0D;color:#00C47A;padding:10px 16px;">THE LANES GROUP — PSL SURVEY SUMMARY</td></tr>
+  <tr><td style="font-family:Arial;font-size:10px;font-weight:bold;padding:6px 12px;background:#F8F8FB;border:1px solid #E2E2EC;">Generated</td><td style="font-family:Arial;font-size:10px;padding:6px 12px;border:1px solid #E2E2EC;">${new Date().toLocaleDateString('en-GB')}</td></tr>
+  <tr><td style="font-family:Arial;font-size:10px;font-weight:bold;padding:6px 12px;background:#F8F8FB;border:1px solid #E2E2EC;">Total Responses</td><td style="font-family:Arial;font-size:10px;padding:6px 12px;border:1px solid #E2E2EC;">${docs.length}</td></tr>
+  <tr><td style="font-family:Arial;font-size:10px;font-weight:bold;padding:6px 12px;background:#F8F8FB;border:1px solid #E2E2EC;">Avg Overall Satisfaction</td><td style="font-family:Arial;font-size:10px;padding:6px 12px;border:1px solid #E2E2EC;">${avg(docs.map(d=>d.overallSatisfaction))}/10</td></tr>
+  <tr><td style="font-family:Arial;font-size:10px;font-weight:bold;padding:6px 12px;background:#F8F8FB;border:1px solid #E2E2EC;">Avg Candidate Quality</td><td style="font-family:Arial;font-size:10px;padding:6px 12px;border:1px solid #E2E2EC;">${avg(docs.map(d=>d.candidateQuality))}/10</td></tr>
+  <tr><td style="font-family:Arial;font-size:10px;font-weight:bold;padding:6px 12px;background:#F8F8FB;border:1px solid #E2E2EC;">Avg Compliance Score</td><td style="font-family:Arial;font-size:10px;padding:6px 12px;border:1px solid #E2E2EC;">${avg(docs.map(d=>d.complianceScore))}/10</td></tr>
+  <tr><td style="font-family:Arial;font-size:10px;font-weight:bold;padding:6px 12px;background:#F8F8FB;border:1px solid #E2E2EC;">Avg Responsiveness</td><td style="font-family:Arial;font-size:10px;padding:6px 12px;border:1px solid #E2E2EC;">${avg(docs.map(d=>d.responsiveness))}/10</td></tr>
+  <tr><td style="font-family:Arial;font-size:10px;font-weight:bold;padding:6px 12px;background:#F8F8FB;border:1px solid #E2E2EC;">Avg Value for Money</td><td style="font-family:Arial;font-size:10px;padding:6px 12px;border:1px solid #E2E2EC;">${avg(docs.map(d=>d.valueForMoney))}/10</td></tr>
+</table>
+</body></html>`;
 
-  // Summary sheet
-  const avg=arr=>{const v=arr.filter(n=>+n>0);return v.length?(v.reduce((a,b)=>a+(+b),0)/v.length).toFixed(1):'N/A';};
-  const summaryData=[
-    ['THE LANES GROUP — PSL SURVEY SUMMARY',''],
-    ['Generated',new Date().toLocaleDateString('en-GB')],
-    ['',''],
-    ['Metric','Value'],
-    ['Total Responses',docs.length],
-    ['Avg Overall Satisfaction',avg(docs.map(d=>d.overallSatisfaction))+'/10'],
-    ['Avg Candidate Quality',avg(docs.map(d=>d.candidateQuality))+'/10'],
-    ['Avg Compliance Score',avg(docs.map(d=>d.complianceScore))+'/10'],
-    ['Avg Responsiveness',avg(docs.map(d=>d.responsiveness))+'/10'],
-    ['Avg Value for Money',avg(docs.map(d=>d.valueForMoney))+'/10'],
-  ];
-  const ws2=XLSX.utils.aoa_to_sheet(summaryData);
-  ws2['!cols']=[{wch:30},{wch:20}];
-  XLSX.utils.book_append_sheet(wb,ws2,'Summary');
-
-  XLSX.writeFile(wb,'Lanes-PSL-Survey-'+new Date().toISOString().slice(0,10)+'.xlsx');
+  const a=document.createElement('a');
+  a.href='data:application/vnd.ms-excel;charset=utf-8,'+encodeURIComponent(html);
+  a.download='Lanes-PSL-Survey-'+new Date().toISOString().slice(0,10)+'.xls';
+  a.click();
 }
 
 function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
