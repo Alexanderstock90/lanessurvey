@@ -98,7 +98,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .btn-sub{background:var(--mint);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;padding:17px 68px;border:none;border-radius:var(--r);cursor:pointer;transition:all .2s;box-shadow:0 4px 20px rgba(0,196,122,.35)}
 .btn-sub:hover:not(:disabled){background:#009F63;transform:translateY(-2px);box-shadow:0 6px 28px rgba(0,196,122,.45)}
 .btn-sub:disabled{background:#C8E6D8;color:#7AB89A;box-shadow:none;cursor:not-allowed;transform:none}
-.sub-note{margin-top:12px;font-size:11px;color:var(--muted)}
 .err-msg{color:var(--red);font-size:13px;font-weight:600;margin-top:14px;display:none;padding:11px 16px;background:#FFF5F5;border:1px solid rgba(229,62,62,.2);border-radius:var(--r)}
 .suc-wrap{display:none;max-width:540px;margin:60px auto;padding:0 24px}
 .suc-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:56px 44px;text-align:center;box-shadow:var(--sh)}
@@ -119,7 +118,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .btn-close-rp:hover{background:#333;border-color:#333;color:var(--white)}
 .btn-pdf{background:#1a1a2e;color:var(--white);border-color:#1a1a2e}
 .btn-pdf:hover{background:#2d2d4a;border-color:#2d2d4a;color:var(--white)}
-.role-client .export-only{display:none!important}
 .role-client .admin-only{display:none!important}
 .btn-delete{background:none;border:1.5px solid rgba(229,62,62,.4);color:#E53E3E;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;padding:5px 12px;border-radius:var(--r);cursor:pointer;transition:all .15s}
 .btn-delete:hover{background:#E53E3E;color:var(--white);border-color:#E53E3E}
@@ -137,6 +135,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .kc{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px 16px;text-align:center;box-shadow:var(--sh)}
 .kn{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--mint);line-height:1;margin-bottom:4px}
 .kl{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.loading-cards{display:flex;flex-direction:column;gap:14px}
+.skel{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:20px 22px;box-shadow:var(--sh);animation:shimmer 1.5s infinite}
+@keyframes shimmer{0%,100%{opacity:1}50%{opacity:.5}}
+.skel-hd{height:20px;background:var(--border);border-radius:4px;width:40%;margin-bottom:10px}
+.skel-line{height:12px;background:var(--border);border-radius:4px;margin-bottom:8px}
+.skel-line.w60{width:60%}.skel-line.w80{width:80%}.skel-line.w50{width:50%}
 .rc{background:var(--white);border:1px solid var(--border);border-radius:12px;margin-bottom:16px;overflow:hidden;box-shadow:var(--sh)}
 .rch{background:var(--black);padding:16px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .rc-name{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:1.5px;color:var(--white)}
@@ -149,7 +153,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 .riv{font-size:13px;font-weight:600;color:var(--ink);line-height:1.4}
 .bw{height:3px;background:var(--border);border-radius:100px;margin-top:6px;overflow:hidden}
 .bf{height:100%;border-radius:100px;background:var(--mint)}
-.i-crit{color:var(--red)}.i-sig{color:var(--amber)}.i-mod{color:#B7791F}
 .rc-cmt{background:var(--mint-lt);border-left:4px solid var(--mint);border-radius:0 var(--r) var(--r) 0;padding:13px 16px;font-size:13px;color:var(--body);line-height:1.7;font-style:italic}
 .rc-cmt-l{font-size:9px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--mint);margin-bottom:5px;font-style:normal}
 .empty{text-align:center;padding:70px 24px;color:var(--muted)}
@@ -367,7 +370,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
         <button class="cb" onclick="selC('cq11',this,'⬇️ Below average — others currently outperform')"><span class="cdot"></span>⬇️ Below average — others currently outperform</button>
       </div>
     </div>
-
     <div class="qc" id="qc-rq13">
       <div class="qm"><span class="qn">Q12 of 13</span><span class="qk">KPI · Value for Money</span></div>
       <div class="qt">How would you rate The Lanes Group on value for money and commercial competitiveness?</div>
@@ -384,7 +386,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
     <div class="sa">
       <button class="btn-sub" id="sub-btn" onclick="doSubmit()">Submit Feedback →</button>
       <div class="err-msg" id="err-msg">⚠ Please complete all highlighted questions above before submitting.</div>
-
     </div>
   </div>
 
@@ -411,13 +412,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       <button class="btn-s btn-close-rp" onclick="closeReports()">✕ Close</button>
     </div>
   </div>
-
   <div class="rp-hero">
     <div class="eyebrow" style="margin-bottom:14px"><span class="dot"></span>Depot Survey Results</div>
     <h1>Supplier <span>Evidence Pack</span></h1>
     <p>All depot responses — Demonstrating the value delivered by The Lanes Group across the PSL.</p>
   </div>
-
   <div class="rw">
     <div class="rtop">
       <div>
@@ -425,7 +424,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
         <p class="rtop-sub" id="data-note">Loading…</p>
       </div>
     </div>
-
     <div class="kg">
       <div class="kc"><div class="kn" id="k1">—</div><div class="kl">Depots Responded</div></div>
       <div class="kc"><div class="kn" id="k2">—</div><div class="kl">Avg Satisfaction /10</div></div>
@@ -434,7 +432,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
       <div class="kc"><div class="kn" id="k5">—</div><div class="kl">Avg Responsiveness</div></div>
       <div class="kc"><div class="kn" id="k6">—</div><div class="kl">Avg Value for Money</div></div>
     </div>
-
     <div id="rep-out"></div>
   </div>
 </div>
@@ -458,7 +455,6 @@ function selR(id,el,val){
   document.querySelectorAll('#'+id+' .rb').forEach(b=>b.classList.remove('on'));
   el.classList.add('on'); A[id]=val; answered('qc-'+id); cp();
 }
-
 function selC(id,el,val){document.querySelectorAll('#'+id+' .cb').forEach(b=>b.classList.remove('on'));el.classList.add('on');A[id]=val;answered('qc-'+id);cp();}
 function selP(id,el,val){document.querySelectorAll('#'+id+' .pb').forEach(b=>b.classList.remove('on'));el.classList.add('on');A[id]=val;answered('qc-'+id);cp();}
 function answered(cid){const el=document.getElementById(cid);if(el){el.classList.add('answered');el.classList.remove('flagged');}}
@@ -535,19 +531,14 @@ async function doSubmit(){
     complianceScore:A['rq5'],inductionReady:A['cq6'],
     retention:A['cq7'],absenceRate:A['cq8'],
     responsiveness:A['rq9'],peakSupport:A['cq10'],
-    pslRanking:A['cq11'],
-    valueForMoney:A['rq13'],
+    pslRanking:A['cq11'],valueForMoney:A['rq13'],
     openFeedback:document.getElementById('q14').value.trim(),
     submittedAt:new Date().toISOString()
   };
   saveLocal(payload);
   updateBadge();
   const saved=await saveToAirtable(payload);
-  if(saved){
-    showToast('✅ Response saved to cloud!');
-  } else {
-    showToast('⚠ Saved locally only — cloud sync failed');
-  }
+  showToast(saved?'✅ Response saved to cloud!':'⚠ Saved locally only — cloud sync failed');
   document.getElementById('form-wrap').style.display='none';
   document.getElementById('suc-depot').textContent=depot;
   document.getElementById('suc-wrap').style.display='block';
@@ -555,7 +546,7 @@ async function doSubmit(){
 }
 
 function saveLocal(p){let r=[];try{r=JSON.parse(localStorage.getItem(LS_KEY)||'[]');}catch(e){}r.unshift(p);localStorage.setItem(LS_KEY,JSON.stringify(r));}
-function getLocal(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'[]');}catch(e){return [];}}
+function getLocal(){try{return JSON.parse(localStorage.getItem(LS_KEY)||'[]');}catch(e){return[];}}
 function updateBadge(){document.getElementById('fab-count').textContent=getLocal().length;}
 
 function doReset(){
@@ -574,29 +565,56 @@ function doReset(){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+// ── AIRTABLE: fetch all records and parse the JSON stored in the Data field
 async function fetchFromAirtable(){
   try{
     const res=await fetch(AT_URL+'?maxRecords=500',{
       headers:{'Authorization':'Bearer '+AT_TOKEN}
     });
-    if(!res.ok){console.error('Airtable GET failed:',res.status,res.statusText);return[];}
+    if(!res.ok){console.error('Airtable GET failed:',res.status);return[];}
     const data=await res.json();
-    console.log('Airtable data:',data);
-    return (data.records||[]).map(r=>({...JSON.parse(r.fields.Data||'{}'),_atId:r.id}));
+    console.log('Airtable raw:',data);
+    const records=data.records||[];
+    const parsed=[];
+    for(const r of records){
+      // The field was renamed to "Data" in Airtable
+      // Try "Data" first, then fall back to any field that contains a JSON string
+      let json=null;
+      if(r.fields.Data) json=r.fields.Data;
+      else{
+        // Fallback: look through all fields for a JSON string
+        for(const v of Object.values(r.fields)){
+          if(typeof v==='string'&&v.startsWith('{')){json=v;break;}
+        }
+      }
+      if(json){
+        try{
+          const obj=JSON.parse(json);
+          parsed.push({...obj,_atId:r.id});
+        }catch(e){console.warn('JSON parse failed for record',r.id);}
+      }
+    }
+    console.log('Parsed records:',parsed);
+    return parsed;
   }catch(e){
     console.error('Airtable fetch error:',e);
     return[];
   }
 }
 
+// ── AIRTABLE: save a new record — stores full payload as JSON in the Data field
 async function saveToAirtable(payload){
   try{
     const res=await fetch(AT_URL,{
       method:'POST',
       headers:{'Authorization':'Bearer '+AT_TOKEN,'Content-Type':'application/json'},
-      body:JSON.stringify({records:[{fields:{Name:payload.depot||'Response',Data:JSON.stringify(payload)}}]})
+      body:JSON.stringify({records:[{fields:{Data:JSON.stringify(payload)}}]})
     });
-    if(!res.ok){console.error('Airtable POST failed:',res.status,await res.text());return false;}
+    if(!res.ok){
+      const err=await res.text();
+      console.error('Airtable POST failed:',res.status,err);
+      return false;
+    }
     console.log('Airtable save success');
     return true;
   }catch(e){
@@ -607,10 +625,7 @@ async function saveToAirtable(payload){
 
 async function deleteFromAirtable(atId){
   try{
-    const res=await fetch(AT_URL+'/'+atId,{
-      method:'DELETE',
-      headers:{'Authorization':'Bearer '+AT_TOKEN}
-    });
+    const res=await fetch(AT_URL+'/'+atId,{method:'DELETE',headers:{'Authorization':'Bearer '+AT_TOKEN}});
     return res.ok;
   }catch(e){return false;}
 }
@@ -625,10 +640,10 @@ async function loadReports(){
     if(docs.length){
       document.getElementById('data-note').textContent=`⚠ Showing ${docs.length} local response${docs.length!==1?'s':''} — could not reach cloud`;
       showToast('⚠ Could not reach cloud — showing local data');
-    } else {
+    }else{
       document.getElementById('data-note').textContent='No responses yet';
     }
-  } else {
+  }else{
     document.getElementById('data-note').textContent=`✅ ${docs.length} response${docs.length!==1?'s':''} from cloud · Refreshed ${new Date().toLocaleTimeString('en-GB')}`;
   }
   renderReports(docs);
@@ -641,7 +656,7 @@ function renderReports(docs){
     ['k1','k2','k3','k4','k5','k6'].forEach(id=>document.getElementById(id).textContent='—');
     return;
   }
-  const avg=arr=>{const v=arr.filter(n=>n>0);return v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(1):'—';};
+  const avg=arr=>{const v=arr.filter(n=>+n>0);return v.length?(v.reduce((a,b)=>a+(+b),0)/v.length).toFixed(1):'—';};
   document.getElementById('k1').textContent=docs.length;
   document.getElementById('k2').textContent=avg(docs.map(d=>+d.overallSatisfaction||0))+'/10';
   document.getElementById('k3').textContent=avg(docs.map(d=>+d.candidateQuality||0))+'/10';
@@ -655,21 +670,21 @@ function renderCard(d){
   const nums=[+d.overallSatisfaction||0,+d.candidateQuality||0,+d.complianceScore||0,+d.responsiveness||0,+d.valueForMoney||0].filter(n=>n>0);
   const sc=nums.length?Math.round(nums.reduce((a,b)=>a+b,0)/nums.length):'—';
   const dt=d.submittedAt?new Date(d.submittedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'';
-  const bar=n=>n?`<div class="bw"><div class="bf" style="width:${n*10}%"></div></div>`:'';
+  const bar=n=>n?`<div class="bw"><div class="bf" style="width:${+n*10}%"></div></div>`:'';
   return `<div class="rc">
   <div class="rch">
-    <div><div class="rc-name">${esc(d.depot)}</div>
+    <div><div class="rc-name">${esc(d.depot||'Unknown Depot')}</div>
     <div class="rc-meta">${esc(d.name)} · ${esc(d.role)} · ${esc(d.region)}${d.headcount?' · ~'+esc(d.headcount)+' workers/wk':''}${d.duration?' · '+esc(d.duration):''}${dt?' · '+dt:''}</div></div>
     <div class="rc-score">⭐ ${sc}/10</div>
-    <button class="btn-delete admin-only" onclick="deleteResponse('${esc(d._atId||'')}','${esc(d.submittedAt)}')">🗑 Delete</button>
+    <button class="btn-delete admin-only" onclick="deleteResponse('${esc(d._atId||'')}','${esc(d.submittedAt||'')}')">🗑 Delete</button>
   </div>
   <div class="rcb">
     <div class="rcg">
-      <div class="ri"><div class="ril">Overall Satisfaction</div><div class="riv">${d.overallSatisfaction}/10${bar(+d.overallSatisfaction)}</div></div>
-      <div class="ri"><div class="ril">Candidate Quality</div><div class="riv">${d.candidateQuality}/10${bar(+d.candidateQuality)}</div></div>
-      <div class="ri"><div class="ril">Compliance Score</div><div class="riv">${d.complianceScore}/10${bar(+d.complianceScore)}</div></div>
-      <div class="ri"><div class="ril">Responsiveness</div><div class="riv">${d.responsiveness}/10${bar(+d.responsiveness)}</div></div>
-      <div class="ri"><div class="ril">Value for Money</div><div class="riv">${d.valueForMoney}/10${bar(+d.valueForMoney)}</div></div>
+      <div class="ri"><div class="ril">Overall Satisfaction</div><div class="riv">${d.overallSatisfaction||'—'}${d.overallSatisfaction?'/10':''}${bar(d.overallSatisfaction)}</div></div>
+      <div class="ri"><div class="ril">Candidate Quality</div><div class="riv">${d.candidateQuality||'—'}${d.candidateQuality?'/10':''}${bar(d.candidateQuality)}</div></div>
+      <div class="ri"><div class="ril">Compliance Score</div><div class="riv">${d.complianceScore||'—'}${d.complianceScore?'/10':''}${bar(d.complianceScore)}</div></div>
+      <div class="ri"><div class="ril">Responsiveness</div><div class="riv">${d.responsiveness||'—'}${d.responsiveness?'/10':''}${bar(d.responsiveness)}</div></div>
+      <div class="ri"><div class="ril">Value for Money</div><div class="riv">${d.valueForMoney||'—'}${d.valueForMoney?'/10':''}${bar(d.valueForMoney)}</div></div>
       <div class="ri"><div class="ril">Fill Rate</div><div class="riv">${esc(d.fillRate)||'—'}</div></div>
       <div class="ri"><div class="ril">Time to Fill</div><div class="riv">${esc(d.timeToFill)||'—'}</div></div>
       <div class="ri"><div class="ril">Worker Retention</div><div class="riv">${esc(d.retention)||'—'}</div></div>
@@ -689,7 +704,7 @@ async function deleteResponse(atId,submittedAt){
   r=r.filter(d=>d.submittedAt!==submittedAt);
   localStorage.setItem(LS_KEY,JSON.stringify(r));
   updateBadge();
-  if(atId) await deleteFromAirtable(atId);
+  if(atId)await deleteFromAirtable(atId);
   showToast('🗑 Response deleted');
   loadReports();
 }
@@ -719,112 +734,54 @@ async function exportPDF(){
   const docs=await fetchFromAirtable();
   const allDocs=docs.length?docs:getLocal();
   if(!allDocs.length){alert('No responses to export yet.');return;}
-
   const avg=arr=>{const v=arr.filter(n=>+n>0);return v.length?(v.reduce((a,b)=>a+(+b),0)/v.length).toFixed(1):'—';};
   const bar=n=>n?`<div style="height:6px;background:#e2e2ec;border-radius:3px;margin-top:4px;overflow:hidden"><div style="height:100%;width:${+n*10}%;background:#00C47A;border-radius:3px;"></div></div>`:'';
-
-  const cards=allDocs.map((d,i)=>{
+  const cards=allDocs.map(d=>{
     const nums=[+d.overallSatisfaction||0,+d.candidateQuality||0,+d.complianceScore||0,+d.responsiveness||0,+d.valueForMoney||0].filter(n=>n>0);
     const sc=nums.length?Math.round(nums.reduce((a,b)=>a+b,0)/nums.length):'—';
     const dt=d.submittedAt?new Date(d.submittedAt).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}):'';
-    const metricBox=(label,val,isNum)=>`
-      <div style="background:#f8f8fb;border:1px solid #e2e2ec;border-radius:6px;padding:10px 12px;">
-        <div style="font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#7a7a96;margin-bottom:3px;">${label}</div>
-        <div style="font-size:12px;font-weight:600;color:#1a1a2e;">${val||'—'}${isNum&&val?'/10':''}</div>
-        ${isNum&&val?bar(val):''}
-      </div>`;
-    return `
-    <div style="background:#fff;border:1px solid #e2e2ec;border-radius:10px;margin-bottom:20px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);page-break-inside:avoid;">
+    const mb=(label,val,isNum)=>`<div style="background:#f8f8fb;border:1px solid #e2e2ec;border-radius:6px;padding:10px 12px;"><div style="font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#7a7a96;margin-bottom:3px;">${label}</div><div style="font-size:12px;font-weight:600;color:#1a1a2e;">${val||'—'}${isNum&&val?'/10':''}</div>${isNum&&val?bar(val):''}</div>`;
+    return `<div style="background:#fff;border:1px solid #e2e2ec;border-radius:10px;margin-bottom:20px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06);page-break-inside:avoid;">
       <div style="background:#0d0d0d;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;">
-        <div>
-          <div style="font-family:'Arial Black',Arial;font-size:16px;font-weight:900;color:#fff;letter-spacing:1px;">${esc(d.depot)}</div>
-          <div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:3px;">${esc(d.name)} · ${esc(d.role)} · ${esc(d.region)}${d.headcount?' · ~'+esc(d.headcount)+' workers/wk':''}${dt?' · '+dt:''}</div>
-        </div>
+        <div><div style="font-family:'Arial Black',Arial;font-size:16px;font-weight:900;color:#fff;">${esc(d.depot||'')}</div>
+        <div style="font-size:10px;color:rgba(255,255,255,.5);margin-top:3px;">${esc(d.name)} · ${esc(d.role)} · ${esc(d.region)}${dt?' · '+dt:''}</div></div>
         <div style="background:#00C47A;color:#fff;font-weight:800;font-size:14px;padding:5px 14px;border-radius:20px;">⭐ ${sc}/10</div>
       </div>
       <div style="padding:16px 20px;">
         <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">
-          ${metricBox('Overall Satisfaction',d.overallSatisfaction,true)}
-          ${metricBox('Candidate Quality',d.candidateQuality,true)}
-          ${metricBox('Compliance Score',d.complianceScore,true)}
-          ${metricBox('Responsiveness',d.responsiveness,true)}
-          ${metricBox('Value for Money',d.valueForMoney,true)}
-          ${metricBox('Fill Rate',d.fillRate,false)}
-          ${metricBox('Time to Fill',d.timeToFill,false)}
-          ${metricBox('Worker Retention',d.retention,false)}
-          ${metricBox('Absence / No-Show Rate',d.absenceRate,false)}
-          ${metricBox('H&S Induction Readiness',d.inductionReady,false)}
-          ${metricBox('Peak Demand Delivery',d.peakSupport,false)}
-          ${metricBox('PSL Ranking vs Others',d.pslRanking,false)}
+          ${mb('Overall Satisfaction',d.overallSatisfaction,true)}${mb('Candidate Quality',d.candidateQuality,true)}${mb('Compliance Score',d.complianceScore,true)}
+          ${mb('Responsiveness',d.responsiveness,true)}${mb('Value for Money',d.valueForMoney,true)}${mb('Fill Rate',d.fillRate,false)}
+          ${mb('Time to Fill',d.timeToFill,false)}${mb('Worker Retention',d.retention,false)}${mb('Absence Rate',d.absenceRate,false)}
+          ${mb('H&S Induction',d.inductionReady,false)}${mb('Peak Delivery',d.peakSupport,false)}${mb('PSL Ranking',d.pslRanking,false)}
         </div>
         ${d.openFeedback?`<div style="background:#e6fbf2;border-left:4px solid #00C47A;border-radius:0 6px 6px 0;padding:12px 14px;font-size:11px;color:#3d3d55;line-height:1.6;font-style:italic;">"${esc(d.openFeedback)}"</div>`:''}
-      </div>
-    </div>`;
+      </div></div>`;
   }).join('');
-
-  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"/>
-<title>Lanes Group — PSL Survey Report</title>
-<style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:Arial,sans-serif;background:#f8f8fb;color:#1a1a2e;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
-  @media print{
-    body{background:#fff}
-    .no-print{display:none!important}
-    .page-break{page-break-before:always}
-  }
-</style>
+  const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"/><title>Lanes Group — PSL Survey Report</title>
+<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;background:#f8f8fb;color:#1a1a2e;-webkit-print-color-adjust:exact;print-color-adjust:exact;}@media print{body{background:#fff}.no-print{display:none!important}}</style>
 </head><body>
-
-<!-- PRINT BUTTON -->
 <div class="no-print" style="position:fixed;top:16px;right:16px;z-index:99;display:flex;gap:8px;">
-  <button onclick="window.print()" style="background:#00C47A;color:#fff;font-family:Arial;font-size:13px;font-weight:700;padding:10px 22px;border:none;border-radius:6px;cursor:pointer;box-shadow:0 4px 12px rgba(0,196,122,.4);">🖨 Save as PDF</button>
+  <button onclick="window.print()" style="background:#00C47A;color:#fff;font-family:Arial;font-size:13px;font-weight:700;padding:10px 22px;border:none;border-radius:6px;cursor:pointer;">🖨 Save as PDF</button>
   <button onclick="window.close()" style="background:#0d0d0d;color:#fff;font-family:Arial;font-size:13px;font-weight:700;padding:10px 16px;border:none;border-radius:6px;cursor:pointer;">✕ Close</button>
 </div>
-
-<!-- HEADER -->
 <div style="background:#0d0d0d;padding:40px 48px 36px;position:relative;overflow:hidden;">
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 65% 50%,rgba(0,196,122,.15) 0%,transparent 70%);pointer-events:none;"></div>
   <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(0,196,122,.1);border:1px solid rgba(0,196,122,.3);border-radius:100px;padding:5px 14px;margin-bottom:16px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00C47A;">PSL Performance Programme</div>
-  <h1 style="font-family:'Arial Black',Arial;font-size:36px;font-weight:900;color:#fff;letter-spacing:1px;line-height:1;margin-bottom:8px;">Supplier <span style="color:#00C47A;">Evidence Pack</span></h1>
+  <h1 style="font-family:'Arial Black',Arial;font-size:36px;font-weight:900;color:#fff;line-height:1;margin-bottom:8px;">Supplier <span style="color:#00C47A;">Evidence Pack</span></h1>
   <p style="color:rgba(255,255,255,.55);font-size:13px;">All depot responses — Demonstrating the value delivered by The Lanes Group across the PSL.</p>
   <p style="color:rgba(255,255,255,.35);font-size:11px;margin-top:6px;">Generated ${new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}</p>
 </div>
-
-<!-- SUMMARY KPIs -->
 <div style="background:#fff;border-bottom:1px solid #e2e2ec;padding:28px 48px;">
   <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#00C47A;margin-bottom:16px;">Summary Overview</div>
   <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:12px;">
-    ${[
-      ['Depots Responded', allDocs.length, false],
-      ['Avg Satisfaction', avg(allDocs.map(d=>d.overallSatisfaction))+'/10', false],
-      ['Avg Candidate Quality', avg(allDocs.map(d=>d.candidateQuality))+'/10', false],
-      ['Avg Compliance', avg(allDocs.map(d=>d.complianceScore))+'/10', false],
-      ['Avg Responsiveness', avg(allDocs.map(d=>d.responsiveness))+'/10', false],
-      ['Avg Value for Money', avg(allDocs.map(d=>d.valueForMoney))+'/10', false],
-    ].map(([label,val])=>`
-      <div style="background:#f8f8fb;border:1px solid #e2e2ec;border-radius:10px;padding:16px 14px;text-align:center;">
-        <div style="font-family:'Arial Black',Arial;font-size:26px;font-weight:900;color:#00C47A;line-height:1;margin-bottom:4px;">${val}</div>
-        <div style="font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#7a7a96;">${label}</div>
-      </div>`).join('')}
+    ${[['Depots Responded',allDocs.length],['Avg Satisfaction',avg(allDocs.map(d=>d.overallSatisfaction))+'/10'],['Avg Candidate Quality',avg(allDocs.map(d=>d.candidateQuality))+'/10'],['Avg Compliance',avg(allDocs.map(d=>d.complianceScore))+'/10'],['Avg Responsiveness',avg(allDocs.map(d=>d.responsiveness))+'/10'],['Avg Value for Money',avg(allDocs.map(d=>d.valueForMoney))+'/10']].map(([label,val])=>`<div style="background:#f8f8fb;border:1px solid #e2e2ec;border-radius:10px;padding:16px 14px;text-align:center;"><div style="font-family:'Arial Black',Arial;font-size:26px;font-weight:900;color:#00C47A;line-height:1;margin-bottom:4px;">${val}</div><div style="font-size:8px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#7a7a96;">${label}</div></div>`).join('')}
   </div>
 </div>
-
-<!-- RESPONSE CARDS -->
-<div style="max-width:960px;margin:0 auto;padding:32px 48px 60px;">
-  <div style="font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:#00C47A;margin-bottom:20px;display:flex;align-items:center;gap:12px;">
-    Depot Responses
-    <div style="flex:1;height:1px;background:#e2e2ec;"></div>
-  </div>
-  ${cards}
-</div>
-
-<!-- FOOTER -->
+<div style="max-width:960px;margin:0 auto;padding:32px 48px 60px;">${cards}</div>
 <div style="background:#0d0d0d;padding:20px 48px;text-align:center;">
   <p style="color:rgba(255,255,255,.35);font-size:10px;letter-spacing:1px;text-transform:uppercase;">The Lanes Group · PSL Survey Report · ${new Date().getFullYear()}</p>
 </div>
-
 </body></html>`;
-
   const w=window.open('','_blank');
   w.document.write(html);
   w.document.close();
@@ -838,6 +795,5 @@ window.addEventListener('load',()=>{
   if(params.has('reports'))openModal();
 });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
 </html>
