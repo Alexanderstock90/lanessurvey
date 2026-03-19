@@ -404,7 +404,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
     <div class="rp-acts">
       <div class="login-badge" id="login-badge">👤 Logged in as: <span id="login-user-label">—</span></div>
       <button class="btn-s" onclick="loadReports()">↻ Refresh</button>
-      <button class="btn-s export-only" onclick="exportCSV()">⬇ Export CSV</button>
+      <button class="btn-s export-only" onclick="exportCSV()">⬇ Export Excel</button>
       <button class="btn-s btn-close-rp" onclick="closeReports()">✕ Close</button>
     </div>
   </div>
@@ -436,6 +436,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
   </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const LS_KEY = "lanesgroup_dhl_v2";
 
@@ -640,12 +641,78 @@ function deleteResponse(submittedAt){
 function exportCSV(){
   const docs=getLocal();
   if(!docs.length){alert('No responses to export yet.');return;}
-  const h=['Submitted At','Depot','Region','Name','Role','Headcount','Duration','Overall Satisfaction','Candidate Quality','Fill Rate','Time to Fill','Compliance','Induction Ready','Retention','Absence Rate','Responsiveness','Peak Support','PSL Ranking','Value for Money','Open Feedback'];
-  const rows=docs.map(d=>[d.submittedAt,d.depot,d.region,d.name,d.role,d.headcount,d.duration,d.overallSatisfaction,d.candidateQuality,d.fillRate,d.timeToFill,d.complianceScore,d.inductionReady,d.retention,d.absenceRate,d.responsiveness,d.peakSupport,d.pslRanking,d.valueForMoney,d.openFeedback].map(v=>'"'+String(v||'').replace(/"/g,'""')+'"'));
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(new Blob([[h.join(','),...rows.map(r=>r.join(','))].join('\n')],{type:'text/csv'}));
-  a.download='lanes-dhl-responses-'+new Date().toISOString().slice(0,10)+'.csv';
-  a.click();
+
+  const headers=['Submitted At','Depot','Region','Manager Name','Job Title','Weekly Headcount','Duration with Lanes','Q1 Overall Satisfaction','Q2 Candidate Quality','Q3 Fill Rate','Q4 Time to Fill','Q5 Compliance Score','Q6 Induction Readiness','Q7 Retention','Q8 Absence Rate','Q9 Responsiveness','Q10 Peak Support','Q11 PSL Ranking','Q12 Value for Money','Q13 Open Feedback'];
+
+  const rows=docs.map(d=>[
+    d.submittedAt?new Date(d.submittedAt).toLocaleDateString('en-GB'):'',
+    d.depot||'',d.region||'',d.name||'',d.role||'',
+    d.headcount||'',d.duration||'',
+    d.overallSatisfaction||'',d.candidateQuality||'',
+    d.fillRate||'',d.timeToFill||'',
+    d.complianceScore||'',d.inductionReady||'',
+    d.retention||'',d.absenceRate||'',
+    d.responsiveness||'',d.peakSupport||'',
+    d.pslRanking||'',d.valueForMoney||'',
+    d.openFeedback||''
+  ]);
+
+  // Build worksheet data with headers
+  const wsData=[headers,...rows];
+  const ws=XLSX.utils.aoa_to_sheet(wsData);
+
+  // Column widths
+  ws['!cols']=[
+    {wch:18},{wch:30},{wch:20},{wch:22},{wch:22},{wch:18},{wch:20},
+    {wch:10},{wch:10},{wch:28},{wch:28},{wch:10},{wch:28},
+    {wch:28},{wch:28},{wch:10},{wch:28},{wch:32},{wch:10},{wch:60}
+  ];
+
+  // Style header row — bold, mint green background
+  const mintFill={fgColor:{rgb:'00C47A'}};
+  const whiteFont={bold:true,color:{rgb:'FFFFFF'},name:'Arial',sz:10};
+  headers.forEach((_,i)=>{
+    const cell=XLSX.utils.encode_cell({r:0,c:i});
+    if(!ws[cell])return;
+    ws[cell].s={fill:mintFill,font:whiteFont,alignment:{horizontal:'center',wrapText:true}};
+  });
+
+  // Style data rows — alternating light background
+  rows.forEach((_,ri)=>{
+    headers.forEach((__,ci)=>{
+      const cell=XLSX.utils.encode_cell({r:ri+1,c:ci});
+      if(!ws[cell])return;
+      ws[cell].s={
+        fill:{fgColor:{rgb:ri%2===0?'F8F8FB':'FFFFFF'}},
+        font:{name:'Arial',sz:10},
+        alignment:{wrapText:true,vertical:'top'}
+      };
+    });
+  });
+
+  // Create workbook
+  const wb=XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb,ws,'Depot Responses');
+
+  // Summary sheet
+  const avg=arr=>{const v=arr.filter(n=>+n>0);return v.length?(v.reduce((a,b)=>a+(+b),0)/v.length).toFixed(1):'N/A';};
+  const summaryData=[
+    ['THE LANES GROUP — PSL SURVEY SUMMARY',''],
+    ['Generated',new Date().toLocaleDateString('en-GB')],
+    ['',''],
+    ['Metric','Value'],
+    ['Total Responses',docs.length],
+    ['Avg Overall Satisfaction',avg(docs.map(d=>d.overallSatisfaction))+'/10'],
+    ['Avg Candidate Quality',avg(docs.map(d=>d.candidateQuality))+'/10'],
+    ['Avg Compliance Score',avg(docs.map(d=>d.complianceScore))+'/10'],
+    ['Avg Responsiveness',avg(docs.map(d=>d.responsiveness))+'/10'],
+    ['Avg Value for Money',avg(docs.map(d=>d.valueForMoney))+'/10'],
+  ];
+  const ws2=XLSX.utils.aoa_to_sheet(summaryData);
+  ws2['!cols']=[{wch:30},{wch:20}];
+  XLSX.utils.book_append_sheet(wb,ws2,'Summary');
+
+  XLSX.writeFile(wb,'Lanes-PSL-Survey-'+new Date().toISOString().slice(0,10)+'.xlsx');
 }
 
 function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
