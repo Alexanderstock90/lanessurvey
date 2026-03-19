@@ -439,7 +439,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
   </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 const LS_KEY = "lanesgroup_dhl_v2";
 const AT_BASE_ID = "appu5F2DcLJAblhHd";
@@ -455,7 +454,6 @@ const USERS = [
 let currentUser = null;
 const A = {};
 
-document.addEventListener('DOMContentLoaded', function(){
 ['rq1','rq2','rq5','rq9','rq13'].forEach(id => {
   const w = document.getElementById(id);
   for (let i = 1; i <= 10; i++) {
@@ -467,7 +465,6 @@ document.addEventListener('DOMContentLoaded', function(){
     };
     w.appendChild(b);
   }
-});
 });
 
 function selC(id,el,val){document.querySelectorAll('#'+id+' .cb').forEach(b=>b.classList.remove('on'));el.classList.add('on');A[id]=val;answered('qc-'+id);cp();}
@@ -849,5 +846,6 @@ window.addEventListener('load',()=>{
   if(params.has('reports'))openModal();
 });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </body>
 </html>
